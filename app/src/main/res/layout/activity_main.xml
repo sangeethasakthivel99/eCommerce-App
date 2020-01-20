@@ -110,9 +110,9 @@
         app:layout_constraintVertical_bias="0.903" />
 
     <com.google.android.gms.common.SignInButton
-        android:layout_width="162dp"
-        android:layout_height="67dp"
         android:id="@+id/google"
+        android:layout_width="156dp"
+        android:layout_height="33dp"
         app:layout_constraintBottom_toBottomOf="@+id/progressBar2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.283"
@@ -123,8 +123,8 @@
 
     <com.facebook.login.widget.LoginButton
         android:id="@+id/buttonFacebookLogin"
-        android:layout_width="166dp"
-        android:layout_height="73dp"
+        android:layout_width="179dp"
+        android:layout_height="56dp"
         android:layout_gravity="center_horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
