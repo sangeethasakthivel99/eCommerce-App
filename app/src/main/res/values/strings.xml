@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">FurnitureFinal</string>
-
+    <string name="log_status">Log Out</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.example.furniturefinal.jsonobjects;
+package com.example.furniturefinal.pojoclass;
 
 import com.google.gson.annotations.SerializedName;
 

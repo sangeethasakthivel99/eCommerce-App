@@ -1,9 +1,13 @@
 package com.example.furniturefinal.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Toast;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,16 +15,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.furniturefinal.R;
 import com.example.furniturefinal.adapters.CategoryAdapter;
 import com.example.furniturefinal.adapters.PopularProductsAdapter;
-import com.example.furniturefinal.jsonobjects.Categories;
-import com.example.furniturefinal.jsonobjects.PopularProducts;
+import com.example.furniturefinal.pojoclass.Categories;
+import com.example.furniturefinal.pojoclass.PopularProducts;
 import com.example.furniturefinal.retrofit.Endpoint;
 import com.example.furniturefinal.retrofit.RetrofitClass;
+import com.google.android.gms.auth.api.Auth;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 import static androidx.recyclerview.widget.RecyclerView.HORIZONTAL;
 
@@ -29,6 +32,7 @@ public class HomeActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private CategoryAdapter categoryAdapter;
     private PopularProductsAdapter popularProductsAdapter;
+    private FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +72,29 @@ public class HomeActivity extends AppCompatActivity {
 //            }
 //        });
 
+        auth = FirebaseAuth.getInstance();
+        FirebaseUser firebaseUser = auth.getCurrentUser();
+
+
+        TextView tv = findViewById(R.id.login);
+
+        if(firebaseUser == null)
+            tv.setText("Log in");
+
+        String logTextBoxStatus = tv.getText().toString();
+
+        if(logTextBoxStatus == "Log in")
+        tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(HomeActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+        else{
+
+        }
+
         }
 
     private void generateCategoryList(List<Categories> categoriesList) {
@@ -85,5 +112,7 @@ public class HomeActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(popularProductsAdapter);
     }
+
+
 
 }

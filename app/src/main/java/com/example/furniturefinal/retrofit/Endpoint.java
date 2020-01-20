@@ -1,7 +1,7 @@
 package com.example.furniturefinal.retrofit;
 
-import com.example.furniturefinal.jsonobjects.Categories;
-import com.example.furniturefinal.jsonobjects.PopularProducts;
+import com.example.furniturefinal.pojoclass.Categories;
+import com.example.furniturefinal.pojoclass.PopularProducts;
 
 import java.util.List;
 

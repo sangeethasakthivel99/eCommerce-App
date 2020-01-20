@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.furniturefinal.R;
 import com.example.furniturefinal.activities.HomeActivity;
-import com.example.furniturefinal.jsonobjects.Categories;
+import com.example.furniturefinal.pojoclass.Categories;
 
 import java.util.List;
 
