@@ -21,9 +21,7 @@
                 android:id="@+id/productImage"
                 android:layout_width="match_parent"
                 android:layout_height="330dp"
-                android:layout_margin="10dp"
-
-                android:src="@drawable/download">
+                android:layout_margin="10dp">
 
             </ImageView>
            <LinearLayout
@@ -34,7 +32,7 @@
                <TextView
                    android:layout_width="match_parent"
                    android:layout_height="50dp"
-                   android:text="BLUE Shoe"
+
                    android:textSize="30dp"
                    android:id="@+id/productName"
                    android:gravity="center"
@@ -56,44 +54,11 @@
                     android:textStyle="bold">
                 </TextView>
             </LinearLayout>
-                <LinearLayout
+                <androidx.recyclerview.widget.RecyclerView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="bottom">
-
-                    <RadioGroup
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <RadioButton
-                            android:id="@+id/mercent1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Mercent One"
-                            />
-
-
-                        <RadioButton
-                            android:id="@+id/mercent2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
-
-                        <RadioButton
-                            android:id="@+id/mercent3"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
-
-                        <RadioButton
-                            android:id="@+id/mercent4"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
-
-                        <RadioButton
-                            android:id="@+id/mercent5"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
-                    </RadioGroup>
-                </LinearLayout>
+                    android:id="@+id/merchant_recycler_view"
+                    />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -109,7 +74,24 @@
                     android:padding="20dp">
                 </RatingBar>
             </LinearLayout>
-            <LinearLayout
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="bottom">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:padding="20dp"
+                android:maxLines="2"
+                android:singleLine="false"
+                android:id="@+id/product_description"
+                android:layout_gravity="bottom">
+
+            </TextView>
+        </LinearLayout>
+
+        <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
