@@ -1,8 +1,10 @@
-package com.example.furniturefinal;
+package com.example.furniturefinal.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.furniturefinal.R;
 
 public class LoginActivity extends AppCompatActivity {
 
