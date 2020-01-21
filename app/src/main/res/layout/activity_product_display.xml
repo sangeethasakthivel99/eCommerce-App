@@ -99,16 +99,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_gravity="bottom">
+                android:layout_gravity="bottom"
+                android:gravity="center">
+
                 <RatingBar
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:id="@+id/rating"
+                    android:layout_width="288dp"
+                    android:layout_height="wrap_content"
                     android:background="#fff"
                     android:numStars="5"
-                    android:padding="20dp">
-                </RatingBar>
+                    android:padding="20dp"></RatingBar>
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
