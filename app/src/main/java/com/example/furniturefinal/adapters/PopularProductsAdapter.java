@@ -41,11 +41,12 @@ public class PopularProductsAdapter extends RecyclerView.Adapter<PopularProducts
             }
         });
 
-        holder.productName.setText(dataList.get(position).getProduct_name());
-        holder.ratings.setText(dataList.get(position).getRatings());
-        holder.price.setText(dataList.get(position).getPrice());
         Glide.with(holder.productImage.getContext()).load(dataList.get(position).getImage())
                 .into(holder.productImage);
+        holder.productName.setText(dataList.get(position).getProduct_name());
+        holder.price.setText("Price : INR "+ String.valueOf(dataList.get(position).getPrice()));
+        holder.ratings.setText("Rating : "+ String.valueOf(dataList.get(position).getRatings()));
+
 
     }
 

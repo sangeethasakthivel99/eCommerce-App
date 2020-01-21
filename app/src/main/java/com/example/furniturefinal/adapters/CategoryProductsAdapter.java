@@ -1,6 +1,5 @@
 package com.example.furniturefinal.adapters;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,12 +42,12 @@ public class CategoryProductsAdapter extends RecyclerView.Adapter<CategoryProduc
             }
         });
 
-        Glide.with(holder.productImage.getContext()).load(dataList.get(position))
+        Glide.with(holder.productImage.getContext()).load(dataList.get(position).getImage())
                 .into(holder.productImage);
 
         holder.productName.setText(dataList.get(position).getProduct_name());
-        holder.price.setText(dataList.get(position).getPrice());
-        holder.rating.setText(dataList.get(position).getRatings());
+        holder.price.setText(String.valueOf(dataList.get(position).getPrice()));
+        holder.rating.setText(String.valueOf(dataList.get(position).getRatings()));
     }
 
     @Override
