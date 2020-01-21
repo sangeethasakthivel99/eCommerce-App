@@ -4,11 +4,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.bumptech.glide.Glide;
 import com.example.furniturefinal.R;
 import com.example.furniturefinal.activities.HomeActivity;
 import com.example.furniturefinal.pojoclass.Categories;
@@ -18,9 +17,11 @@ import java.util.List;
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CustomViewHolder> {
 
         private List<Categories> dataList;
+        CategoryCommunication categoryCommunication;
 
-        public CategoryAdapter(HomeActivity homeActivity, List<Categories> categoriesList) {
+        public CategoryAdapter(CategoryCommunication categoryCommunication, List<Categories> categoriesList) {
             this.dataList = categoriesList;
+            this.categoryCommunication = categoryCommunication;
         }
 
         @NonNull
@@ -31,10 +32,16 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Custom
         }
 
         @Override
-        public void onBindViewHolder(@NonNull CustomViewHolder holder, int position) {
+        public void onBindViewHolder(@NonNull CustomViewHolder holder,final int position) {
 
-            Glide.with(holder.imageView.getContext()).load(dataList.get(position).getMsg())
-                    .into(holder.imageView);
+            holder.categoryName.getRootView() .setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    categoryCommunication.onClick(dataList.get(position));
+                }
+            });
+
+            holder.categoryName.setText(dataList.get(position).getCategory_name());
 
         }
 
@@ -44,14 +51,18 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Custom
         }
 
         class CustomViewHolder extends RecyclerView.ViewHolder {
-            ImageView imageView;
+            TextView categoryName;
 
             public CustomViewHolder(@NonNull View itemView) {
                 super(itemView);
 
-                imageView = itemView.findViewById(R.id.category);
+                categoryName = itemView.findViewById(R.id.category);
 
 
             }
+        }
+
+        public interface CategoryCommunication{
+            void onClick(Categories categories);
         }
     }
