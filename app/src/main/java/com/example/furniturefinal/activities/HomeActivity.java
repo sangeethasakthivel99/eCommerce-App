@@ -85,7 +85,7 @@ public class HomeActivity extends AppCompatActivity implements PopularProductsAd
             loginStatus.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(HomeActivity.this, MainActivity.class);
+                    Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
                     startActivity(intent);
                 }
             });

@@ -31,7 +31,7 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-
+        Toast.makeText(this, this.getClass().getName(), Toast.LENGTH_SHORT).show();
         name=findViewById(R.id.name);
         email=findViewById(R.id.email);
         password=findViewById(R.id.password);
@@ -40,7 +40,7 @@ public class RegisterActivity extends AppCompatActivity {
         already_login=findViewById(R.id.already_registered_tv);
         auth=FirebaseAuth.getInstance();
         if(auth.getCurrentUser()!=null){
-            startActivity(new Intent(getApplicationContext(),MainActivity.class));
+            startActivity(new Intent(getApplicationContext(),LoginActivity.class));
             finish();
         }
         register.setOnClickListener(new View.OnClickListener() {
@@ -70,7 +70,7 @@ public class RegisterActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             Toast.makeText(RegisterActivity.this, "User Created", Toast.LENGTH_LONG).show();
-                            startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                            startActivity(new Intent(getApplicationContext(),LoginActivity.class));
                         }
                         else{
                             Toast.makeText(RegisterActivity.this,"Error!" +task.getException().getMessage(),Toast.LENGTH_LONG).show();
@@ -84,7 +84,7 @@ public class RegisterActivity extends AppCompatActivity {
        already_login.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
-               startActivity(new Intent(getApplicationContext(),MainActivity.class));
+               startActivity(new Intent(getApplicationContext(),LoginActivity.class));
            }
        });
     }

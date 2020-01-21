@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">FurnitureFinal</string>
     <string name="log_status">Log Out</string>
+
+    <string name="facebook_app_id">115674826430221</string>
+    <string name="fb_login_protocol_scheme">fb115674826430221</string>
+
+
 </resources>
