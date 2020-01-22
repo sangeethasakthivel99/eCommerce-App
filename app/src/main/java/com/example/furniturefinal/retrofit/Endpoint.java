@@ -23,8 +23,8 @@ public interface Endpoint {
     @GET("/getCategoryProduct")
     Call<List<CategoryProducts>> getCategoryProduct();
 
-    @GET("/getOrder/{customerId}")
-    Call<List<CartModel>> getOrder(@Path("customerId")String customerId);
+    @GET("/getOrder/{customer_id}")
+    Call<List<CartModel>> getOrder(@Path("customer_id")String customer_id);
 
 
 }

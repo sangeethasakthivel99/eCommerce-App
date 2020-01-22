@@ -3,43 +3,87 @@ package com.example.furniturefinal.pojoclass;
 import com.google.gson.annotations.SerializedName;
 
 public class CartProducts {
-    @SerializedName("order_id")
-    String order_id;
-    @SerializedName("product_name")
-    String product_name;
+    @SerializedName("productName")
+    String productName;
+    @SerializedName("productId")
+    int productId;
+    @SerializedName("merchantName")
+    String merchantName;
+    @SerializedName("merchantId")
+    int merchantId;
+    @SerializedName("image")
+    String image;
     @SerializedName("price")
-    String price;
+    int price;
+    @SerializedName("quantity")
+    int quantity;
 
-    public String getOrder_id() {
-        return order_id;
+    public String getProductName() {
+        return productName;
     }
 
-    public void setOrder_id(String order_id) {
-        this.order_id = order_id;
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
-    public String getProduct_name() {
-        return product_name;
+    public int getProductId() {
+        return productId;
     }
 
-    public void setProduct_name(String product_name) {
-        this.product_name = product_name;
+    public void setProductId(int productId) {
+        this.productId = productId;
     }
 
-    public String getPrice() {
+    public String getMerchantName() {
+        return merchantName;
+    }
+
+    public void setMerchantName(String merchantName) {
+        this.merchantName = merchantName;
+    }
+
+    public int getMerchantId() {
+        return merchantId;
+    }
+
+    public void setMerchantId(int merchantId) {
+        this.merchantId = merchantId;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(int price) {
         this.price = price;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     @Override
     public String toString() {
         return "CartProducts{" +
-                "order_id='" + order_id + '\'' +
-                ", product_name='" + product_name + '\'' +
-                ", price='" + price + '\'' +
+                "productName='" + productName + '\'' +
+                ", productId=" + productId +
+                ", merchantName='" + merchantName + '\'' +
+                ", merchantId=" + merchantId +
+                ", image='" + image + '\'' +
+                ", price=" + price +
+                ", quantity=" + quantity +
                 '}';
     }
 }
