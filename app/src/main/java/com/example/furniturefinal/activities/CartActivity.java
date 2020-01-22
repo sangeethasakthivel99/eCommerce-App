@@ -13,19 +13,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.furniturefinal.interfaces.CartActivityInterface;
 import com.example.furniturefinal.viewHolder.CartModel;
 import com.example.furniturefinal.R;
-import com.example.furniturefinal.adapters.RecyclerAdapter;
+import com.example.furniturefinal.adapters.DisplayCartAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CartActivity extends AppCompatActivity implements CartActivityInterface {
+public class CartActivity extends AppCompatActivity  {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private Bundle savedInstanceState;
-    int minteger=1;
+    int count=1;
+    private Button increment;
+    private Button decrease;
+    private TextView textCount;
     private List<CartModel>list;
 
     @SuppressLint("ClickableViewAccessibility")
@@ -34,6 +36,9 @@ public class CartActivity extends AppCompatActivity implements CartActivityInter
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recycler_activity);
         recyclerView=(RecyclerView)findViewById(R.id.recycle);
+        increment=(Button)findViewById(R.id.increase);
+        decrease=(Button)findViewById(R.id.decrease);
+        textCount=(TextView)findViewById(R.id.textCount);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         list=new ArrayList<>();
@@ -45,7 +50,7 @@ public class CartActivity extends AppCompatActivity implements CartActivityInter
             );
 
             list.add(cartModel);
-            adapter=new RecyclerAdapter(this,list);
+            adapter=new DisplayCartAdapter(this,list);
             recyclerView.setAdapter(adapter);
         }
             Button checkout=findViewById(R.id.checkout);
@@ -59,7 +64,7 @@ public class CartActivity extends AppCompatActivity implements CartActivityInter
             public  void displayAlert()
             {
                 new AlertDialog.Builder(CartActivity.this).setMessage("Check Your Mail")
-                        .setTitle("Invoice Email")
+                        .setTitle("Email Invoice")
                         .setCancelable(true)
                         .setNeutralButton(android.R.string.ok,
                                 new DialogInterface.OnClickListener() {
@@ -69,30 +74,24 @@ public class CartActivity extends AppCompatActivity implements CartActivityInter
                                 })
                         .show();
             }
+        });
+        increment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                count++;
+                textCount.setText(String.valueOf(count));
 
+            }
+        });
 
+      decrease.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                count--;
+                textCount.setText(String.valueOf(count));
 
+            }
         });
     }
-    @Override
-    public void increaseInteger(View view) {
-        minteger = minteger + 1;
 
-        display(minteger);
-
-    }
-    @Override public void decreaseInteger(View view) {
-        if(minteger-1<1)
-            display(1);
-        else {
-            minteger = minteger - 1;
-            display(minteger);
-        }
-    }
-@Override
-    public void display(int number) {
-        TextView displayInteger = (TextView) findViewById(
-                R.id.integer_number);
-        displayInteger.setText("" + number);
-    }
 }

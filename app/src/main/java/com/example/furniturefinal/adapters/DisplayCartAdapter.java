@@ -15,11 +15,11 @@ import com.example.furniturefinal.R;
 
 import java.util.List;
 
-public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
+public class DisplayCartAdapter extends RecyclerView.Adapter<DisplayCartAdapter.ViewHolder> {
     Context context;
     List<CartModel> cartList;
 
-    public RecyclerAdapter(Context context, List<CartModel> cartList) {
+    public DisplayCartAdapter(Context context, List<CartModel> cartList) {
         this.context = context;
         this.cartList = cartList;
     }
