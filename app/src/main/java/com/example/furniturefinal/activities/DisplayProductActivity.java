@@ -20,7 +20,7 @@ import com.example.furniturefinal.pojoclass.Merchant;
 import com.example.furniturefinal.pojoclass.Products;
 import com.example.furniturefinal.retrofit.Endpoint;
 import com.example.furniturefinal.retrofit.RetrofitClass;
-import com.example.furniturefinal.viewHolder.CartModel;
+import com.example.furniturefinal.pojoclass.CartModel;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -89,7 +89,7 @@ public class DisplayProductActivity extends AppCompatActivity implements Merchan
        addToCart.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
-               Intent intent=new Intent(DisplayProductActivity.this,CartActivity.class);
+               Intent intent=new Intent(DisplayProductActivity.this, CartActivity.class);
                startActivity(intent);
            }
        });

@@ -76,6 +76,7 @@ public class HomeActivity extends AppCompatActivity implements PopularProductsAd
 
 
         TextView loginStatus = findViewById(R.id.login);
+        TextView user=findViewById(R.id.user);
 
         if (firebaseUser == null)
             loginStatus.setText("Log in");
@@ -99,6 +100,17 @@ public class HomeActivity extends AppCompatActivity implements PopularProductsAd
                 }
             });
         }
+        user.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                auth.signOut();
+                Intent intent = new Intent(HomeActivity.this, UserActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+
 
         List<PopularProducts> popularProductsCheckList = new ArrayList<>();
         for(int i=0;i<10;i++){

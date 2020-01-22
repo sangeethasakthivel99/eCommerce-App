@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.furniturefinal.viewHolder.CartModel;
+import com.example.furniturefinal.pojoclass.CartModel;
 import com.example.furniturefinal.R;
 import com.example.furniturefinal.adapters.DisplayCartAdapter;
 

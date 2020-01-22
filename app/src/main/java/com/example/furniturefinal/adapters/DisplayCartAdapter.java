@@ -1,6 +1,7 @@
 package com.example.furniturefinal.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +11,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.furniturefinal.viewHolder.CartModel;
+import com.example.furniturefinal.activities.CartActivity;
+import com.example.furniturefinal.pojoclass.CartModel;
 import com.example.furniturefinal.R;
 
 import java.util.List;
@@ -37,6 +39,13 @@ public class DisplayCartAdapter extends RecyclerView.Adapter<DisplayCartAdapter.
 //        holder.img.setImageResource(cartList.get(position).getImage());
         holder.productName.setText(cartList.get(position).getProductName());
         holder.productPrice.setText(cartList.get(position).getProductPrice());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(),CartActivity.class);
+                context.startActivity(intent);
+            }
+        });
 
     }
 

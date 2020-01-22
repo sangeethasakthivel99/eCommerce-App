@@ -1,4 +1,4 @@
-package com.example.furniturefinal.viewHolder;
+package com.example.furniturefinal.pojoclass;
 
 public class CartModel {
     int image;
