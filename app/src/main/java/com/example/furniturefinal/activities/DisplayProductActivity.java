@@ -23,7 +23,9 @@ import com.example.furniturefinal.retrofit.RetrofitClass;
 import com.example.furniturefinal.viewHolder.CartModel;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -41,6 +43,7 @@ public class DisplayProductActivity extends AppCompatActivity implements Merchan
     private TextView price;
     private TextView productDescription;
     private List<CartModel> list;
+    private TextView attibutes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,21 +59,24 @@ public class DisplayProductActivity extends AppCompatActivity implements Merchan
         productName = findViewById(R.id.productName);
         price = findViewById(R.id.productPrice);
         productDescription = findViewById(R.id.product_description);
+        attibutes = findViewById(R.id.attributes);
         productDetails.enqueue(new Callback<Products>() {
             @Override
             public void onResponse(Call<Products> call, Response<Products> response) {
                 generateMerchantList(response.body().getOtherMerchants());
                 if(response != null){
-                    Glide.with(DisplayProductActivity.this).load("https://ii1.pepperfry.com/media/catalog/product/m/i/494x544/Minimalistic-Sheesham-Wood-Coffee-Table-16013-1341407138QXRrdA.jpg")
-                            .into(image);//response.body().getImage()
-                    productName.setText("Product1");//response.body().getProductName()
-                    ratingBar.setNumStars(3);//response.body().getProductRating()
-                    price.setText(String.valueOf(100));//response.body().getPrice())
-//                    Map<String, String> hm = new HashMap<String, String>();
-//                    hm.put("USA", "Washington");
-//                    hm.put("United Kingdom", "London");
-//                    hm.put("India", "New Delhi");
-                    productDescription.setText("Random Description");
+                    Glide.with(DisplayProductActivity.this).load(response.body().getImage())
+                            .into(image);
+                    productName.setText(response.body().getProductName());
+                    ratingBar.setNumStars(response.body().getProductRating());
+                    price.setText(String.valueOf(response.body().getPrice()));
+
+                    productDescription.setText(response.body().getDescription());
+                    Map<String, String> getAttributes = response.body().getAttributes();
+                    StringBuilder tempAttributeStorage = new StringBuilder();
+                    for (Map.Entry<String,String> entry : getAttributes.entrySet())
+                        tempAttributeStorage.append(entry.getKey() + ": " + entry.getValue() + "\n");
+                    attibutes.setText(tempAttributeStorage.toString());
                 }
             }
 
@@ -89,11 +95,20 @@ public class DisplayProductActivity extends AppCompatActivity implements Merchan
        });
 
         Glide.with(DisplayProductActivity.this).load("https://ii1.pepperfry.com/media/catalog/product/m/i/494x544/Minimalistic-Sheesham-Wood-Coffee-Table-16013-1341407138QXRrdA.jpg")
-                .into(image);//response.body().getImage()
+                .into(image);
        ratingBar.setRating(3.5f);
        productName.setText("Sofa 4 seat");
        price.setText("Price : 49999");
        productDescription.setText("This is descriptions");
+        Map<String, String> hm = new HashMap<>();
+        hm.put("Attribute 1", "Good");
+        hm.put("Attribute 2", "Great");
+        hm.put("Attribute 3", "Awesome");
+
+        StringBuilder tempAttributeStorage1 = new StringBuilder();
+        for (Map.Entry<String,String> entry : hm.entrySet())
+            tempAttributeStorage1.append(entry.getKey() + ": " + entry.getValue() + "\n");
+        attibutes.setText(tempAttributeStorage1.toString());
 
         List<Merchant> merchantCheckList = new ArrayList<>();
 

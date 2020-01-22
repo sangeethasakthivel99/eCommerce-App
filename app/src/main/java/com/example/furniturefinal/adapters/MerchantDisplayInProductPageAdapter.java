@@ -1,8 +1,10 @@
 package com.example.furniturefinal.adapters;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,6 +19,7 @@ public class MerchantDisplayInProductPageAdapter extends RecyclerView.Adapter<Me
 
     private List<Merchant> dataList;
     private MerchantDisplayInProductPageCommunication merchantDisplayInProductPageCommunication;
+    private int index = -1;
 
     public MerchantDisplayInProductPageAdapter(MerchantDisplayInProductPageCommunication merchantDisplayInProductPageCommunication, List<Merchant> merchantList) {
         this.dataList = merchantList;
@@ -39,6 +42,22 @@ public class MerchantDisplayInProductPageAdapter extends RecyclerView.Adapter<Me
             }
         });
         holder.merchantDetails.setText(dataList.get(position).getMerchantName()+": " + String.valueOf(dataList.get(position).getPrice()));
+
+        holder.linearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                index = position;
+                notifyDataSetChanged();
+            }
+        });
+
+        if(index==position){
+            holder.linearLayout.setBackgroundColor(Color.parseColor("#FF4081"));
+            holder.merchantDetails.setTextColor(Color.parseColor("#FFFFFF"));
+        }else{
+            holder.linearLayout.setBackgroundColor(Color.parseColor("#FFFFFF"));
+            holder.merchantDetails.setTextColor(Color.parseColor("#000000"));
+        }
     }
 
 
@@ -49,10 +68,11 @@ public class MerchantDisplayInProductPageAdapter extends RecyclerView.Adapter<Me
 
     class CustomViewHolder extends RecyclerView.ViewHolder {
         TextView merchantDetails;
+        LinearLayout linearLayout;
 
         public CustomViewHolder(@NonNull View itemView) {
             super(itemView);
-
+            linearLayout = (LinearLayout)itemView.findViewById(R.id.linearLayout);
             merchantDetails = itemView.findViewById(R.id.merchant_details);
         }
     }
