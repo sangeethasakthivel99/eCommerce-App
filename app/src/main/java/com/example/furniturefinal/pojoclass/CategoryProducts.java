@@ -1,12 +1,21 @@
 package com.example.furniturefinal.pojoclass;
 
+import com.google.gson.annotations.SerializedName;
+
 public class CategoryProducts {
+    @SerializedName("product_id")
     String product_id;
+    @SerializedName("product_name")
     String product_name;
+    @SerializedName("image")
 	String image;
+    @SerializedName("ratings")
 	int ratings;
+    @SerializedName("price")
     int price;
+    @SerializedName("merchantName")
     String merchantName;
+    @SerializedName("merchantId")
     String merchantId;
 
     public String getProduct_id() {

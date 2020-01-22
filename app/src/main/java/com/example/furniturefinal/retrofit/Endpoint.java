@@ -9,6 +9,7 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 
 public interface Endpoint {
     @GET("/getCategories")
@@ -20,5 +21,7 @@ public interface Endpoint {
     @GET("/getCategoryProduct")
     Call<List<CategoryProducts>> getCategoryProduct();
 
+    @GET("/getProductDetails/{productId}")
+    Call<Products> getProductDetails(@Path("productId")String productId);
 
 }

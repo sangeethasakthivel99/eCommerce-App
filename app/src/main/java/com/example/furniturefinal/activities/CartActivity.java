@@ -19,7 +19,7 @@ public class CartActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private Bundle savedInstanceState;
-    int minteger=0;
+    int minteger=1;
     private List<CartModel>list;
 
     @Override
@@ -48,6 +48,8 @@ public class CartActivity extends AppCompatActivity {
 
     }public void decreaseInteger(View view) {
         minteger = minteger - 1;
+        if(minteger<0)
+            display(1);
         display(minteger);
     }
 
