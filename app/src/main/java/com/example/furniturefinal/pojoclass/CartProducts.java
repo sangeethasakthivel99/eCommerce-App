@@ -13,7 +13,7 @@ public class CartProducts {
     int merchantId;
     @SerializedName("image")
     String image;
-    @SerializedName("productsPrice")
+    @SerializedName("productPrice")
     int price;
     @SerializedName("quantity")
     int quantity;
@@ -82,7 +82,7 @@ public class CartProducts {
                 ", name='" + name + '\'' +
                 ", merchantId=" + merchantId +
                 ", imageUrl='" + image + '\'' +
-                ", productsPrice=" + price +
+                ", productPrice=" + price +
                 ", quantity=" + quantity +
                 '}';
     }

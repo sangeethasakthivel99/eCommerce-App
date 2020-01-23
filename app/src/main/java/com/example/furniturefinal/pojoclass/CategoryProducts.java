@@ -7,16 +7,12 @@ public class CategoryProducts {
     String productId;
     @SerializedName("productName")
     String productName;
-    @SerializedName("image")
-	String image;
-    @SerializedName("productRatings")
-	int ratings;
-    @SerializedName("productsPrice")
-    int price;
-    @SerializedName("name")
-    String name;
-    @SerializedName("merchantId")
-    String merchantId;
+    @SerializedName("imageUrl")
+	String imageUrl;
+    @SerializedName("productRating")
+	int productRating;
+    @SerializedName("productPrice")
+    int productPrice;
 
     public String getProductId() {
         return productId;
@@ -34,44 +30,28 @@ public class CategoryProducts {
         this.productName = productName;
     }
 
-    public String getImage() {
-        return image;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
-    public int getRatings() {
-        return ratings;
+    public int getProductRating() {
+        return productRating;
     }
 
-    public void setRatings(int ratings) {
-        this.ratings = ratings;
+    public void setProductRating(int productRating) {
+        this.productRating = productRating;
     }
 
-    public int getPrice() {
-        return price;
+    public int getProductPrice() {
+        return productPrice;
     }
 
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getMerchantId() {
-        return merchantId;
-    }
-
-    public void setMerchantId(String merchantId) {
-        this.merchantId = merchantId;
+    public void setProductPrice(int productPrice) {
+        this.productPrice = productPrice;
     }
 
     @Override
@@ -79,11 +59,9 @@ public class CategoryProducts {
         return "CategoryProducts{" +
                 "productId='" + productId + '\'' +
                 ", productName='" + productName + '\'' +
-                ", imageUrl='" + image + '\'' +
-                ", productRatings=" + ratings +
-                ", productsPrice=" + price +
-                ", name='" + name + '\'' +
-                ", merchantId='" + merchantId + '\'' +
+                ", imageUrl='" + imageUrl + '\'' +
+                ", productRating=" + productRating +
+                ", productPrice=" + productPrice +
                 '}';
     }
 }

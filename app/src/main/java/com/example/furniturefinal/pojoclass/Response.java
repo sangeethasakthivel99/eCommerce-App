@@ -2,7 +2,7 @@ package com.example.furniturefinal.pojoclass;
 
 import java.util.List;
 
-public class Response{
+public class Response<T>{
 	private List<Object> data;
 	private boolean success;
 	private Object message;

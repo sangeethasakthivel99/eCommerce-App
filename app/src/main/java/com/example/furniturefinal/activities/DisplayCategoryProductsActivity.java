@@ -11,10 +11,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.furniturefinal.R;
 import com.example.furniturefinal.adapters.CategoryProductsAdapter;
 import com.example.furniturefinal.pojoclass.CategoryProducts;
+import com.example.furniturefinal.pojoclass.ResponseDto;
 import com.example.furniturefinal.retrofit.Endpoint;
 import com.example.furniturefinal.retrofit.RetrofitClass;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -31,37 +31,37 @@ public class DisplayCategoryProductsActivity extends AppCompatActivity implement
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_category);
         Endpoint service = RetrofitClass.getRetrofit().create(Endpoint.class);
-        Intent intent = new Intent();
+        Intent intent = getIntent();
         String categoryId = intent.getStringExtra("categoryId");
-        Call<List<CategoryProducts>> products = service.getCategoryProduct(categoryId);
+        Call<ResponseDto<List<CategoryProducts>>> products = service.getCategoryProduct(categoryId);
 
-        products.enqueue(new Callback<List<CategoryProducts>>() {
+        products.enqueue(new Callback<ResponseDto<List<CategoryProducts>>>() {
             @Override
-            public void onResponse(Call<List<CategoryProducts>> call, Response<List<CategoryProducts>> response) {
-                generateCategoryProductsList(response.body());
+            public void onResponse(Call<ResponseDto<List<CategoryProducts>>> call, Response<ResponseDto<List<CategoryProducts>>> response) {
+                generateCategoryProductsList(response.body().getData());
             }
 
             @Override
-            public void onFailure(Call<List<CategoryProducts>> call, Throwable t) {
+            public void onFailure(Call<ResponseDto<List<CategoryProducts>>> call, Throwable t) {
                 Toast.makeText(DisplayCategoryProductsActivity.this, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
             }
         });
 
-        List<CategoryProducts> categoriesChecklist = new ArrayList<>();
-        for(int i = 0; i < 10; i++)
-        {
-            CategoryProducts c = new CategoryProducts();
-            c.setImage("https://ii1.pepperfry.com/media/catalog/product/m/i/494x544/Minimalistic-Sheesham-Wood-Coffee-Table-16013-1341407138QXRrdA.jpg");
-            c.setMerchantId("1ab");
-            c.setName("ads");
-            c.setPrice(1000);
-            c.setRatings(2);
-            c.setProductName("Wood");
-            c.setProductId("1a");
-
-            categoriesChecklist.add(c);
-        }
-        generateCategoryProductsList(categoriesChecklist);
+//        List<CategoryProducts> categoriesChecklist = new ArrayList<>();
+//        for(int i = 0; i < 10; i++)
+//        {
+//            CategoryProducts c = new CategoryProducts();
+//            c.setImageUrl("https://ii1.pepperfry.com/media/catalog/product/m/i/494x544/Minimalistic-Sheesham-Wood-Coffee-Table-16013-1341407138QXRrdA.jpg");
+//            c.setMerchantId("1ab");
+//            c.setName("ads");
+//            c.setProductPrice(1000);
+//            c.setProductRating(2);
+//            c.setProductName("Wood");
+//            c.setProductId("1a");
+//
+//            categoriesChecklist.add(c);
+//        }
+        //generateCategoryProductsList(categoriesChecklist);
 
     }
 
@@ -77,7 +77,6 @@ public class DisplayCategoryProductsActivity extends AppCompatActivity implement
     public void onClick(CategoryProducts products) {
         Intent intent=new Intent( DisplayCategoryProductsActivity.this, DisplayProductActivity.class);
         intent.putExtra("product_id", products.getProductId());
-        intent.putExtra("merchant_id",products.getMerchantId());
         startActivity(intent);
     }
 }

@@ -3,6 +3,7 @@ package com.example.furniturefinal.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,12 +17,12 @@ import com.example.furniturefinal.adapters.CategoryAdapter;
 import com.example.furniturefinal.adapters.PopularProductsAdapter;
 import com.example.furniturefinal.pojoclass.Categories;
 import com.example.furniturefinal.pojoclass.PopularProducts;
+import com.example.furniturefinal.pojoclass.ResponseDto;
 import com.example.furniturefinal.retrofit.Endpoint;
 import com.example.furniturefinal.retrofit.RetrofitClass;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -39,6 +40,9 @@ public class HomeActivity extends AppCompatActivity implements PopularProductsAd
     private PopularProductsAdapter popularProductsAdapter;
     private FirebaseAuth auth;
 
+    private TextView loginStatus;
+    private SearchView searchView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,21 +50,47 @@ public class HomeActivity extends AppCompatActivity implements PopularProductsAd
 
         Endpoint service = RetrofitClass.getRetrofit().create(Endpoint.class);
 
-        Call<List<Categories>> categories = service.getCategories();
-
-        categories.enqueue(new Callback<List<Categories>>() {
-            @Override
-            public void onResponse(Call<List<Categories>> call, Response<List<Categories>> response) {
+//        Call<List<Categories>> categories = service.getCategories();
+//
+//        categories.enqueue(new Callback<List<Categories>>() {
+//            @Override
+//            public void onResponse(Call<List<Categories>> call, Response<List<Categories>> response) {
 //                generateCategoryList(response.body());
+//
+//            }
+//
+//            @Override
+//            public void onFailure(Call<List<Categories>> call, Throwable t) {
+//                Toast.makeText(HomeActivity.this, "Something went wrong with categories...Please try later!", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+        Call<ResponseDto<List<Categories>>> categoriesCall = service.getCategoriesGeneric();
+        categoriesCall.enqueue(new Callback<ResponseDto<List<Categories>>>() {
+            @Override
+            public void onResponse(Call<ResponseDto<List<Categories>>> call, Response<ResponseDto<List<Categories>>> response) {
+                generateCategoryList(response.body().getData());
             }
 
             @Override
-            public void onFailure(Call<List<Categories>> call, Throwable t) {
-                Toast.makeText(HomeActivity.this, "Something went wrong with categories...Please try later!", Toast.LENGTH_SHORT).show();
+            public void onFailure(Call<ResponseDto<List<Categories>>> call, Throwable t) {
+                Toast.makeText(HomeActivity.this, "Failed1", Toast.LENGTH_SHORT).show();
             }
         });
 
-//        Call<List<PopularProducts>> popularProducts = service.getPopularProducts();
+        Call<ResponseDto<List<PopularProducts>>> popularproductsCall = service.getPopularProductsGeneric();
+        popularproductsCall.enqueue(new Callback<ResponseDto<List<PopularProducts>>>() {
+            @Override
+            public void onResponse(Call<ResponseDto<List<PopularProducts>>> call, Response<ResponseDto<List<PopularProducts>>> response) {
+                generatePopularProductsList(response.body().getData());
+            }
+
+            @Override
+            public void onFailure(Call<ResponseDto<List<PopularProducts>>> call, Throwable t) {
+                Toast.makeText(HomeActivity.this, "Failed2", Toast.LENGTH_LONG).show();
+            }
+        });
+
+//        Call<ResponseDto<List<PopularProducts>>> popularProducts = service.getPopularProducts();
 //        popularProducts.enqueue(new Callback<List<PopularProducts>>() {
 //            @Override
 //            public void onResponse(Call<List<PopularProducts>> call, Response<List<PopularProducts>> response) {
@@ -76,8 +106,7 @@ public class HomeActivity extends AppCompatActivity implements PopularProductsAd
         auth = FirebaseAuth.getInstance();
         FirebaseUser firebaseUser = auth.getCurrentUser();
 
-
-        TextView loginStatus = findViewById(R.id.login);
+        loginStatus = findViewById(R.id.login);
 
         if (firebaseUser == null)
             loginStatus.setText("Log in");
@@ -102,30 +131,47 @@ public class HomeActivity extends AppCompatActivity implements PopularProductsAd
             });
         }
 
-        List<PopularProducts> popularProductsCheckList = new ArrayList<>();
-        for(int i=0;i<10;i++){
-            PopularProducts pp = new PopularProducts();
-            pp.setImageUrl("https://ii1.pepperfry.com/media/catalog/product/m/i/494x544/Minimalistic-Sheesham-Wood-Coffee-Table-16013-1341407138QXRrdA.jpg");
-            pp.setProductId("1a");
-            pp.setProductsPrice(1000);
-            pp.setMerchantId("1ab");
-            pp.setMerchantName("abc");
-            pp.setProductName("Shoes");
-            pp.setProductRatings(3);
+        searchView = findViewById(R.id.searchBar);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Intent intent = new Intent(HomeActivity.this, SearchResultsActivity.class);
+                intent.putExtra("query", query);
+                startActivity(intent);
+                return true;
+            }
 
-            popularProductsCheckList.add(pp);
-        }
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+
+//
+//        List<PopularProducts> popularProductsCheckList = new ArrayList<>();
+//        for(int i=0;i<10;i++){
+//            PopularProducts pp = new PopularProducts();
+//            pp.setImageUrl("https://ii1.pepperfry.com/media/catalog/product/m/i/494x544/Minimalistic-Sheesham-Wood-Coffee-Table-16013-1341407138QXRrdA.jpg");
+//            pp.setProductId("1a");
+//            pp.setProductPrice(1000);
+//            pp.setMerchantId("1ab");
+//            pp.setName("abc");
+//            pp.setProductName("Shoes");
+//            pp.setProductRating(3);
+//
+//            popularProductsCheckList.add(pp);
+//        }
 //        generatePopularProductsList(popularProductsCheckList);
 
-        List<Categories> categoriesChecklist = new ArrayList<>();
-        for(int i = 0; i < 10; i++)
-        {
-            Categories c = new Categories();
-            c.setCategoryId("1a");
-            c.setCategoryName("Category" + i);
-
-            categoriesChecklist.add(c);
-        }
+//        List<Categories> categoriesChecklist = new ArrayList<>();
+//        for(int i = 0; i < 10; i++)
+//        {
+//            Categories c = new Categories();
+//            c.setCategoryId("1a");
+//            c.setCategoryName("Categories" + i);
+//
+//            categoriesChecklist.add(c);
+//        }
        // generateCategoryList(categoriesChecklist);
     }
 
@@ -149,7 +195,7 @@ public class HomeActivity extends AppCompatActivity implements PopularProductsAd
     public void onClick(PopularProducts popularProducts) {
         Intent intent = new Intent(HomeActivity.this, DisplayProductActivity.class);
         intent.putExtra("productId", popularProducts.getProductId());
-        intent.putExtra("merchantId", popularProducts.getMerchantId());
+//        intent.putExtra("merchantId", popularProducts.getMerchantId());
         startActivity(intent);
     }
 

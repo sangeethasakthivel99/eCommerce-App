@@ -7,7 +7,7 @@
     tools:context=".activities.SearchResultsActivity">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/category_products_recycler_view"
+        android:id="@+id/search_products_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="8dp"

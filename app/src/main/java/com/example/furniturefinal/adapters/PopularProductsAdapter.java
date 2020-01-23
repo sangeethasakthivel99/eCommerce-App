@@ -44,8 +44,8 @@ public class PopularProductsAdapter extends RecyclerView.Adapter<PopularProducts
         Glide.with(holder.productImage.getContext()).load(dataList.get(position).getImageUrl())
                 .into(holder.productImage);
         holder.productName.setText(dataList.get(position).getProductName());
-        holder.price.setText("Price : INR "+ String.valueOf(dataList.get(position).getProductsPrice()));
-        holder.ratings.setText("Rating : "+ String.valueOf(dataList.get(position).getProductRatings()));
+        holder.price.setText("Price : INR "+ String.valueOf(dataList.get(position).getProductPrice()));
+        holder.ratings.setText("Rating : "+ String.valueOf(dataList.get(position).getProductRating()));
 
 
     }
@@ -66,8 +66,8 @@ public class PopularProductsAdapter extends RecyclerView.Adapter<PopularProducts
 
             productImage = itemView.findViewById(R.id.imageUrl);
             productName = itemView.findViewById(R.id.productName);
-            ratings = itemView.findViewById(R.id.rating);
-            price = itemView.findViewById(R.id.productsPrice);
+            ratings = itemView.findViewById(R.id.productRating);
+            price = itemView.findViewById(R.id.productPrice);
         }
     }
 

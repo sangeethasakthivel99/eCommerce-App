@@ -10,15 +10,15 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".activities.DisplayProductActivity">
-
-        </activity>
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".activities.SearchResultsActivity"></activity>
+        <activity android:name=".activities.DisplayProductActivity"></activity>
         <activity android:name=".activities.DisplayCategoryProductsActivity" />
         <activity android:name=".activities.RegisterActivity" />
         <activity android:name=".activities.CartActivity" />
         <activity android:name=".activities.UserActivity" />
-        <activity android:name=".activities.LoginActivity"/>
+        <activity android:name=".activities.LoginActivity" />
         <activity android:name=".activities.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
