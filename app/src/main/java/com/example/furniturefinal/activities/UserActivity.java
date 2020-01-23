@@ -5,6 +5,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -36,6 +37,7 @@ import java.util.Map;
 public class UserActivity extends AppCompatActivity {
  TextView mname,memail,maddress,mcontactNumber;
  Button save;
+ Button image_Button;
  ImageView imageUrl;
  String server_url="http://ip address/file name";
 AlertDialog.Builder builder;
@@ -46,11 +48,11 @@ AlertDialog.Builder builder;
         mname=findViewById(R.id.editName);
         memail=findViewById(R.id.editEmail);
        // password=findViewById(R.id.editPassword);
+        image_Button=findViewById(R.id.imageButton);
         maddress=findViewById(R.id.editAddress);
         mcontactNumber=findViewById(R.id.editPhoneNumber);
         imageUrl=findViewById(R.id.image);
         save=findViewById(R.id.save);
-        getImageUrl();
         builder=new AlertDialog.Builder(UserActivity.this);
         save.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,6 +102,13 @@ AlertDialog.Builder builder;
                     }
                 };
 
+            }
+        });
+        image_Button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(UserActivity.this,CaptureImage.class);
+                startActivity(intent);
             }
         });
 

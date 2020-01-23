@@ -17,89 +17,96 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:orientation="horizontal"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
                     <ImageView
                         android:id="@+id/productImage"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
-                        android:layout_margin="10dp"
-                        android:src="@drawable/download">
+                        android:layout_margin="10dp">
 
                     </ImageView>
+
                     <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
+                        android:layout_width="57dp"
+                        android:layout_height="102dp"
                         android:layout_weight="5"
-                        android:orientation="vertical"
-                        android:gravity="start|center">
+                        android:gravity="start|center"
+                        android:orientation="vertical">
+
                         <TextView
                             android:id="@+id/productName"
                             android:layout_width="wrap_content"
-                            android:textStyle="bold"
-                            android:textSize="20dp"
                             android:layout_height="wrap_content"
-                            android:text="Blue Shoe">
-                        </TextView>
+                            android:textSize="20dp"
+                            android:textStyle="bold"></TextView>
+
                         <TextView
                             android:id="@+id/productPrice"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textStyle="bold"
-                            android:text="2000 Rs"/>
+                            android:textStyle="bold" />
 
 
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
                         android:layout_gravity="bottom"
-                        android:layout_weight="1">
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
 
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="56dp"
-                            android:orientation="horizontal"
-                            android:background="@drawable/background_shape">
+                            android:background="@drawable/background_shape"
+                            android:orientation="horizontal">
 
 
                             <TextView
                                 android:id="@+id/textCount"
-                                android:layout_width="39dp"
-                                android:layout_height="30dp"
+                                android:layout_width="37dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="top"
                                 android:layout_marginLeft="40dp"
                                 android:layout_marginTop="16dp"
                                 android:layout_marginRight="40dp"
                                 android:layout_marginBottom="16dp"
-                                android:gravity="top"
+                                android:gravity="center|left"
                                 android:text="1"
-
-                                android:textSize="20dp"
+                                android:textSize="30sp"
                                 android:textStyle="bold" />
 
                             <Button
                                 android:id="@+id/increase"
                                 android:layout_width="50dp"
                                 android:layout_height="wrap_content"
-                                android:onClick="increaseInteger"
-                                android:text="+" />
+                                android:layout_gravity="left"
+                                android:text="+"
+                                android:textSize="25sp"
+                                android:textStyle="bold"
+                               />
 
                             <Button
-                            android:id="@+id/decrease"
-                            android:layout_width="50dp"
-                            android:layout_height="wrap_content"
-                            android:onClick="decreaseInteger"
-                            android:text="-" />
+                                android:id="@+id/decrease"
+                                android:layout_width="50dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="right"
+                                android:text="-"
+                                android:textStyle="bold"
+                                android:textSize="25sp"/>
 
+                        </LinearLayout>
                     </LinearLayout>
-                    </LinearLayout>
-            </LinearLayout>
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>

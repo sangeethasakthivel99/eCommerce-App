@@ -120,7 +120,7 @@ public class HomeActivity extends AppCompatActivity implements PopularProductsAd
             pp.setPrice(1000);
             pp.setMerchantId("1ab");
             pp.setMerchantName("abc");
-            pp.setProduct_name("Shoes");
+            pp.setProduct_name("Table");
             pp.setRatings(3);
 
             popularProductsCheckList.add(pp);

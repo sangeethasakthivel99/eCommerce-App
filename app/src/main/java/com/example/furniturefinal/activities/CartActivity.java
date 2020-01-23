@@ -24,57 +24,58 @@ public class CartActivity extends AppCompatActivity  {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private Bundle savedInstanceState;
-    int count=1;
+    //int count = 1;
     private Button increment;
     private Button decrease;
     private TextView textCount;
-    private List<CartModel>list;
+    private List<CartModel> list;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recycler_activity);
-        recyclerView=(RecyclerView)findViewById(R.id.recycle);
-        increment=(Button)findViewById(R.id.increase);
-        decrease=(Button)findViewById(R.id.decrease);
-        textCount=(TextView)findViewById(R.id.textCount);
+        recyclerView = (RecyclerView) findViewById(R.id.recycle);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        list=new ArrayList<>();
-        for(int i=0;i<10;i++) {
+        list = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
             CartModel cartModel = new CartModel(
-                    123,
+                    "123",
                     "ProductName" + i + 1,
-                    "2000000"
+                    "2000000",
+                     1
             );
 
             list.add(cartModel);
-            adapter=new DisplayCartAdapter(this,list);
+            adapter = new DisplayCartAdapter(this, list);
             recyclerView.setAdapter(adapter);
         }
-            Button checkout=findViewById(R.id.checkout);
-            checkout.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    displayAlert();
-                    return false;
-                }
+        Button checkout = findViewById(R.id.checkout);
+        checkout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                displayAlert();
+                return false;
+            }
 
-            public  void displayAlert()
-            {
+            public void displayAlert() {
                 new AlertDialog.Builder(CartActivity.this).setMessage("Check Your Mail")
                         .setTitle("Email Invoice")
                         .setCancelable(true)
                         .setNeutralButton(android.R.string.ok,
                                 new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int whichButton){
+                                    public void onClick(DialogInterface dialog, int whichButton) {
                                         finish();
                                     }
                                 })
                         .show();
             }
         });
+    }
+/*
+    @Override
+    public void incrementButton() {
         increment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,8 +84,11 @@ public class CartActivity extends AppCompatActivity  {
 
             }
         });
+    }
 
-      decrease.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void decrementButton() {
+        decrease.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 count--;
@@ -92,6 +96,9 @@ public class CartActivity extends AppCompatActivity  {
 
             }
         });
+
     }
+    */
+
 
 }

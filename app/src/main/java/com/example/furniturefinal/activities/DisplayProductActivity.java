@@ -2,7 +2,10 @@ package com.example.furniturefinal.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.ScaleGestureDetector;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
@@ -30,6 +33,8 @@ import java.util.Map;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 
 public class DisplayProductActivity extends AppCompatActivity implements MerchantDisplayInProductPageAdapter.MerchantDisplayInProductPageCommunication{
     private MerchantDisplayInProductPageAdapter merchantDisplayInProductPageAdapter;
@@ -97,13 +102,13 @@ public class DisplayProductActivity extends AppCompatActivity implements Merchan
         Glide.with(DisplayProductActivity.this).load("https://ii1.pepperfry.com/media/catalog/product/m/i/494x544/Minimalistic-Sheesham-Wood-Coffee-Table-16013-1341407138QXRrdA.jpg")
                 .into(image);
        ratingBar.setRating(3.5f);
-       productName.setText("Sofa 4 seat");
+       productName.setText("Table");
        price.setText("Price : 49999");
        productDescription.setText("This is descriptions");
         Map<String, String> hm = new HashMap<>();
-        hm.put("Attribute 1", "Good");
-        hm.put("Attribute 2", "Great");
-        hm.put("Attribute 3", "Awesome");
+        hm.put("Attribute 1", "wooden");
+        hm.put("Attribute 2", "2m X 5m");
+        hm.put("Attribute 3", "compact");
 
         StringBuilder tempAttributeStorage1 = new StringBuilder();
         for (Map.Entry<String,String> entry : hm.entrySet())
