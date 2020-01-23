@@ -4,32 +4,43 @@ import com.google.gson.annotations.SerializedName;
 
 public class Categories{
 
-	@SerializedName("category_id")
-	private String category_id;
-	@SerializedName("category_name")
-	private String category_name;
+	@SerializedName("categoryId")
+	private String categoryId;
+	@SerializedName("categoryName")
+	private String categoryName;
+	@SerializedName("categoryImageUrl")
+	private String categoryImageUrl;
 
-	public String getCategory_id() {
-		return category_id;
+	public String getCategoryId() {
+		return categoryId;
 	}
 
-	public void setCategory_id(String category_id) {
-		this.category_id = category_id;
+	public void setCategoryId(String categoryId) {
+		this.categoryId = categoryId;
 	}
 
-	public String getCategory_name() {
-		return category_name;
+	public String getCategoryName() {
+		return categoryName;
 	}
 
-	public void setCategory_name(String category_name) {
-		this.category_name = category_name;
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
+	}
+
+	public String getCategoryImageUrl() {
+		return categoryImageUrl;
+	}
+
+	public void setCategoryImageUrl(String categoryImageUrl) {
+		this.categoryImageUrl = categoryImageUrl;
 	}
 
 	@Override
 	public String toString() {
 		return "Categories{" +
-				"category_id='" + category_id + '\'' +
-				", category_name='" + category_name + '\'' +
+				"categoryId='" + categoryId + '\'' +
+				", categoryName='" + categoryName + '\'' +
+				", categoryImageUrl='" + categoryImageUrl + '\'' +
 				'}';
 	}
 }

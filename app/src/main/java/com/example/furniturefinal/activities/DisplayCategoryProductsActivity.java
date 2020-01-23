@@ -1,12 +1,12 @@
 package com.example.furniturefinal.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.furniturefinal.R;
 import com.example.furniturefinal.adapters.CategoryProductsAdapter;
@@ -31,8 +31,9 @@ public class DisplayCategoryProductsActivity extends AppCompatActivity implement
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_category);
         Endpoint service = RetrofitClass.getRetrofit().create(Endpoint.class);
-
-        Call<List<CategoryProducts>> products = service.getCategoryProduct();
+        Intent intent = new Intent();
+        String categoryId = intent.getStringExtra("categoryId");
+        Call<List<CategoryProducts>> products = service.getCategoryProduct(categoryId);
 
         products.enqueue(new Callback<List<CategoryProducts>>() {
             @Override
@@ -52,11 +53,11 @@ public class DisplayCategoryProductsActivity extends AppCompatActivity implement
             CategoryProducts c = new CategoryProducts();
             c.setImage("https://ii1.pepperfry.com/media/catalog/product/m/i/494x544/Minimalistic-Sheesham-Wood-Coffee-Table-16013-1341407138QXRrdA.jpg");
             c.setMerchantId("1ab");
-            c.setMerchantName("ads");
+            c.setName("ads");
             c.setPrice(1000);
             c.setRatings(2);
-            c.setProduct_name("Wood");
-            c.setProduct_id("1a");
+            c.setProductName("Wood");
+            c.setProductId("1a");
 
             categoriesChecklist.add(c);
         }
@@ -75,7 +76,7 @@ public class DisplayCategoryProductsActivity extends AppCompatActivity implement
     @Override
     public void onClick(CategoryProducts products) {
         Intent intent=new Intent( DisplayCategoryProductsActivity.this, DisplayProductActivity.class);
-        intent.putExtra("product_id", products.getProduct_id());
+        intent.putExtra("product_id", products.getProductId());
         intent.putExtra("merchant_id",products.getMerchantId());
         startActivity(intent);
     }

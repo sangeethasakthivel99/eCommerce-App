@@ -45,7 +45,7 @@ public class CategoryProductsAdapter extends RecyclerView.Adapter<CategoryProduc
         Glide.with(holder.productImage.getContext()).load(dataList.get(position).getImage())
                 .into(holder.productImage);
 
-        holder.productName.setText(dataList.get(position).getProduct_name());
+        holder.productName.setText(dataList.get(position).getProductName());
         holder.price.setText(String.valueOf(dataList.get(position).getPrice()));
         holder.rating.setText(String.valueOf(dataList.get(position).getRatings()));
     }
@@ -64,9 +64,9 @@ public class CategoryProductsAdapter extends RecyclerView.Adapter<CategoryProduc
         public CustomViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            productImage = itemView.findViewById(R.id.product_image);
-            productName = itemView.findViewById(R.id.product_name);
-            price = itemView.findViewById(R.id.price);
+            productImage = itemView.findViewById(R.id.imageUrl);
+            productName = itemView.findViewById(R.id.productName);
+            price = itemView.findViewById(R.id.productPrice);
             rating = itemView.findViewById(R.id.rating);
         }
     }

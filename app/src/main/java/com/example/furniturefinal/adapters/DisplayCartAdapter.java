@@ -34,7 +34,7 @@ public class DisplayCartAdapter extends RecyclerView.Adapter<DisplayCartAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-//        holder.img.setImageResource(cartList.get(position).getImage());
+//        holder.img.setImageResource(cartList.get(position).getImageUrl());
         holder.productName.setText(cartList.get(position).getProductName());
         holder.productPrice.setText(cartList.get(position).getProductPrice());
 
@@ -50,7 +50,7 @@ public class DisplayCartAdapter extends RecyclerView.Adapter<DisplayCartAdapter.
         TextView productName,productPrice;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            img=itemView.findViewById(R.id.productImage);
+            img=itemView.findViewById(R.id.imageUrl);
             productName=itemView.findViewById(R.id.productName);
             productPrice=itemView.findViewById(R.id.productPrice);
         }

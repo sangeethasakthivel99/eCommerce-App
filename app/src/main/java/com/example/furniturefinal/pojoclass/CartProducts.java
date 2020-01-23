@@ -7,13 +7,13 @@ public class CartProducts {
     String productName;
     @SerializedName("productId")
     int productId;
-    @SerializedName("merchantName")
-    String merchantName;
+    @SerializedName("name")
+    String name;
     @SerializedName("merchantId")
     int merchantId;
     @SerializedName("image")
     String image;
-    @SerializedName("price")
+    @SerializedName("productsPrice")
     int price;
     @SerializedName("quantity")
     int quantity;
@@ -34,12 +34,12 @@ public class CartProducts {
         this.productId = productId;
     }
 
-    public String getMerchantName() {
-        return merchantName;
+    public String getName() {
+        return name;
     }
 
-    public void setMerchantName(String merchantName) {
-        this.merchantName = merchantName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getMerchantId() {
@@ -79,10 +79,10 @@ public class CartProducts {
         return "CartProducts{" +
                 "productName='" + productName + '\'' +
                 ", productId=" + productId +
-                ", merchantName='" + merchantName + '\'' +
+                ", name='" + name + '\'' +
                 ", merchantId=" + merchantId +
-                ", image='" + image + '\'' +
-                ", price=" + price +
+                ", imageUrl='" + image + '\'' +
+                ", productsPrice=" + price +
                 ", quantity=" + quantity +
                 '}';
     }

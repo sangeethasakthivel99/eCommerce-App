@@ -3,13 +3,11 @@ package com.example.furniturefinal.adapters;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.furniturefinal.R;
-import com.example.furniturefinal.activities.HomeActivity;
 import com.example.furniturefinal.pojoclass.Categories;
 
 import java.util.List;
@@ -41,7 +39,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Custom
                 }
             });
 
-            holder.categoryName.setText(dataList.get(position).getCategory_name());
+            holder.categoryName.setText(dataList.get(position).getCategoryName());
 
         }
 
@@ -56,7 +54,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Custom
             public CustomViewHolder(@NonNull View itemView) {
                 super(itemView);
 
-                categoryName = itemView.findViewById(R.id.category);
+                categoryName = itemView.findViewById(R.id.categoryName);
 
 
             }

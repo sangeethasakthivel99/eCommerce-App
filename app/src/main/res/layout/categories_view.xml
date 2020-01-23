@@ -3,8 +3,12 @@
     android:orientation="vertical" android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
+    <ImageView
+        android:layout_width="96dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/categoryImageUrl"/>
     <TextView
-        android:id="@+id/category"
+        android:id="@+id/categoryName"
         android:layout_width="96dp"
         android:layout_height="wrap_content" />
 

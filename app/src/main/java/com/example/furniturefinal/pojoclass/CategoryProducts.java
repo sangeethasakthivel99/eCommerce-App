@@ -3,35 +3,35 @@ package com.example.furniturefinal.pojoclass;
 import com.google.gson.annotations.SerializedName;
 
 public class CategoryProducts {
-    @SerializedName("product_id")
-    String product_id;
-    @SerializedName("product_name")
-    String product_name;
+    @SerializedName("productId")
+    String productId;
+    @SerializedName("productName")
+    String productName;
     @SerializedName("image")
 	String image;
-    @SerializedName("ratings")
+    @SerializedName("productRatings")
 	int ratings;
-    @SerializedName("price")
+    @SerializedName("productsPrice")
     int price;
-    @SerializedName("merchantName")
-    String merchantName;
+    @SerializedName("name")
+    String name;
     @SerializedName("merchantId")
     String merchantId;
 
-    public String getProduct_id() {
-        return product_id;
+    public String getProductId() {
+        return productId;
     }
 
-    public void setProduct_id(String product_id) {
-        this.product_id = product_id;
+    public void setProductId(String productId) {
+        this.productId = productId;
     }
 
-    public String getProduct_name() {
-        return product_name;
+    public String getProductName() {
+        return productName;
     }
 
-    public void setProduct_name(String product_name) {
-        this.product_name = product_name;
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
     public String getImage() {
@@ -58,12 +58,12 @@ public class CategoryProducts {
         this.price = price;
     }
 
-    public String getMerchantName() {
-        return merchantName;
+    public String getName() {
+        return name;
     }
 
-    public void setMerchantName(String merchantName) {
-        this.merchantName = merchantName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getMerchantId() {
@@ -77,12 +77,12 @@ public class CategoryProducts {
     @Override
     public String toString() {
         return "CategoryProducts{" +
-                "product_id='" + product_id + '\'' +
-                ", product_name='" + product_name + '\'' +
-                ", image='" + image + '\'' +
-                ", ratings=" + ratings +
-                ", price=" + price +
-                ", merchantName='" + merchantName + '\'' +
+                "productId='" + productId + '\'' +
+                ", productName='" + productName + '\'' +
+                ", imageUrl='" + image + '\'' +
+                ", productRatings=" + ratings +
+                ", productsPrice=" + price +
+                ", name='" + name + '\'' +
                 ", merchantId='" + merchantId + '\'' +
                 '}';
     }

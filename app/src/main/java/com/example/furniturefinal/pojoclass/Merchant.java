@@ -3,28 +3,28 @@ package com.example.furniturefinal.pojoclass;
 import com.google.gson.annotations.SerializedName;
 
 public class Merchant {
-    @SerializedName("merchantName")
-    private String merchantName;
+    @SerializedName("name")
+    private String name;
     @SerializedName("merchantId")
     private int merchantId;
-    @SerializedName("price")
-    private int price;
+    @SerializedName("productsPrice")
+    private int productsPrice;
 
     @Override
     public String toString() {
         return "Merchant{" +
-                "merchantName='" + merchantName + '\'' +
+                "name='" + name + '\'' +
                 ", merchantId=" + merchantId +
-                ", price=" + price +
+                ", productsPrice=" + productsPrice +
                 '}';
     }
 
-    public String getMerchantName() {
-        return merchantName;
+    public String getName() {
+        return name;
     }
 
-    public void setMerchantName(String merchantName) {
-        this.merchantName = merchantName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getMerchantId() {
@@ -35,11 +35,11 @@ public class Merchant {
         this.merchantId = merchantId;
     }
 
-    public int getPrice() {
-        return price;
+    public int getProductsPrice() {
+        return productsPrice;
     }
 
-    public void setPrice(int price) {
-        this.price = price;
+    public void setProductsPrice(int productsPrice) {
+        this.productsPrice = productsPrice;
     }
 }

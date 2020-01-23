@@ -51,9 +51,9 @@ public class DisplayProductActivity extends AppCompatActivity implements Merchan
         setContentView(R.layout.activity_product_display);
         Endpoint service = RetrofitClass.getRetrofit().create(Endpoint.class);
         Intent intent = new Intent();
-        String productId = intent.getStringExtra("product_id");
+        String productId = intent.getStringExtra("productId");
         Call<Products> productDetails = service.getProductDetails(productId);
-        image = findViewById(R.id.productImage);
+        image = findViewById(R.id.imageUrl);
         ratingBar = findViewById(R.id.rating);
         ratingBar.setIsIndicator(true);
         productName = findViewById(R.id.productName);
@@ -97,7 +97,7 @@ public class DisplayProductActivity extends AppCompatActivity implements Merchan
         Glide.with(DisplayProductActivity.this).load("https://ii1.pepperfry.com/media/catalog/product/m/i/494x544/Minimalistic-Sheesham-Wood-Coffee-Table-16013-1341407138QXRrdA.jpg")
                 .into(image);
        ratingBar.setRating(3.5f);
-       productName.setText("Sofa 4 seat");
+       productName.setText("Table");
        price.setText("Price : 49999");
        productDescription.setText("This is descriptions");
         Map<String, String> hm = new HashMap<>();
@@ -115,12 +115,12 @@ public class DisplayProductActivity extends AppCompatActivity implements Merchan
 
             Merchant m1 = new Merchant();
             m1.setMerchantId(1);
-            m1.setMerchantName("AA");
-            m1.setPrice(100);
+            m1.setName("AA");
+            m1.setProductsPrice(100);
             Merchant m2 = new Merchant();
-            m2.setMerchantName("BB");
+            m2.setName("BB");
             m2.setMerchantId(2);
-            m2.setPrice(200);
+            m2.setProductsPrice(200);
 
 
             merchantCheckList.add(m1);

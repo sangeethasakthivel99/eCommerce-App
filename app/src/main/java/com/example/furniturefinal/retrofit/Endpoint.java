@@ -10,8 +10,6 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
-import retrofit2.http.POST;
-import retrofit2.http.Path;
 import retrofit2.http.Path;
 
 public interface Endpoint {
@@ -21,13 +19,14 @@ public interface Endpoint {
     @GET("/getPopularProducts")
     Call<List<PopularProducts>> getPopularProducts();
 
-    @GET("/getCategoryProduct")
-    Call<List<CategoryProducts>> getCategoryProduct();
+    @GET("/getCategoryProduct/{categoryId}")
+    Call<List<CategoryProducts>> getCategoryProduct(@Path("categoryId")String categoryId);
 
     @GET("/getProductDetails/{productId}")
     Call<Products> getProductDetails(@Path("productId")String productId);
-    @GET("/getOrder/{customer_id}")
-    Call<List<CartModel>> getOrder(@Path("customer_id")String customer_id);
+
+    @GET("/getOrder/{customerId}")
+    Call<List<CartModel>> getOrder(@Path("customerId")String customerId);
 
 
 }

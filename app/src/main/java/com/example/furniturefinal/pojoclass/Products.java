@@ -12,7 +12,7 @@ public class Products {
     private int merchantId;
     @SerializedName("productName")
     private String productName;
-    @SerializedName("price")
+    @SerializedName("productsPrice")
     private int price;
     @SerializedName("description")
     private String description;
@@ -31,9 +31,9 @@ public class Products {
                 "productId=" + productId +
                 ", merchantId=" + merchantId +
                 ", productName='" + productName + '\'' +
-                ", price=" + price +
+                ", productsPrice=" + price +
                 ", description='" + description + '\'' +
-                ", image='" + image + '\'' +
+                ", imageUrl='" + image + '\'' +
                 ", attributes=" + attributes +
                 ", productRating=" + productRating +
                 ", otherMerchants=" + otherMerchants +
