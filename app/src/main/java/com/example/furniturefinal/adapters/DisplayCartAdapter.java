@@ -95,7 +95,7 @@ public class DisplayCartAdapter extends RecyclerView.Adapter<DisplayCartAdapter.
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            img = itemView.findViewById(R.id.productImage);
+            img = itemView.findViewById(R.id.imageUrl);
             productName = itemView.findViewById(R.id.productName);
             productPrice = itemView.findViewById(R.id.productPrice);
             increment = itemView.findViewById(R.id.increase);

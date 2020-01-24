@@ -3,87 +3,65 @@ package com.example.furniturefinal.pojoclass;
 import com.google.gson.annotations.SerializedName;
 
 public class CategoryProducts {
-    @SerializedName("product_id")
-    String product_id;
-    @SerializedName("product_name")
-    String product_name;
-    @SerializedName("image")
-	String image;
-    @SerializedName("ratings")
-	int ratings;
-    @SerializedName("price")
-    int price;
-    @SerializedName("merchantName")
-    String merchantName;
-    @SerializedName("merchantId")
-    String merchantId;
+    @SerializedName("productId")
+    String productId;
+    @SerializedName("productName")
+    String productName;
+    @SerializedName("imageUrl")
+	String imageUrl;
+    @SerializedName("productRating")
+	int productRating;
+    @SerializedName("productPrice")
+    int productPrice;
 
-    public String getProduct_id() {
-        return product_id;
+    public String getProductId() {
+        return productId;
     }
 
-    public void setProduct_id(String product_id) {
-        this.product_id = product_id;
+    public void setProductId(String productId) {
+        this.productId = productId;
     }
 
-    public String getProduct_name() {
-        return product_name;
+    public String getProductName() {
+        return productName;
     }
 
-    public void setProduct_name(String product_name) {
-        this.product_name = product_name;
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
-    public String getImage() {
-        return image;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
-    public int getRatings() {
-        return ratings;
+    public int getProductRating() {
+        return productRating;
     }
 
-    public void setRatings(int ratings) {
-        this.ratings = ratings;
+    public void setProductRating(int productRating) {
+        this.productRating = productRating;
     }
 
-    public int getPrice() {
-        return price;
+    public int getProductPrice() {
+        return productPrice;
     }
 
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
-    public String getMerchantName() {
-        return merchantName;
-    }
-
-    public void setMerchantName(String merchantName) {
-        this.merchantName = merchantName;
-    }
-
-    public String getMerchantId() {
-        return merchantId;
-    }
-
-    public void setMerchantId(String merchantId) {
-        this.merchantId = merchantId;
+    public void setProductPrice(int productPrice) {
+        this.productPrice = productPrice;
     }
 
     @Override
     public String toString() {
         return "CategoryProducts{" +
-                "product_id='" + product_id + '\'' +
-                ", product_name='" + product_name + '\'' +
-                ", image='" + image + '\'' +
-                ", ratings=" + ratings +
-                ", price=" + price +
-                ", merchantName='" + merchantName + '\'' +
-                ", merchantId='" + merchantId + '\'' +
+                "productId='" + productId + '\'' +
+                ", productName='" + productName + '\'' +
+                ", imageUrl='" + imageUrl + '\'' +
+                ", productRating=" + productRating +
+                ", productPrice=" + productPrice +
                 '}';
     }
 }

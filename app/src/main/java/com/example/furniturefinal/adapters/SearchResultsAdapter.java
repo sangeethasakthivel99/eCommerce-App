@@ -15,30 +15,30 @@ import com.example.furniturefinal.pojoclass.CategoryProducts;
 
 import java.util.List;
 
-public class CategoryProductsAdapter extends RecyclerView.Adapter<CategoryProductsAdapter.CustomViewHolder> {
+public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdapter.CustomViewHolder> {
 
     private List<CategoryProducts> dataList;
-    private CategoryProductsCommunication categoryProductsCommunication;
+    private SearchResultsCommunication searchResultsCommunication;
 
-    public CategoryProductsAdapter(CategoryProductsCommunication categoryProductsCommunication, List<CategoryProducts> productsList) {
+    public SearchResultsAdapter(SearchResultsCommunication searchResultsCommunication, List<CategoryProducts> productsList) {
         this.dataList = productsList;
-        this.categoryProductsCommunication = categoryProductsCommunication;
+        this.searchResultsCommunication = searchResultsCommunication;
     }
 
     @NonNull
     @Override
-    public CategoryProductsAdapter.CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View root = LayoutInflater.from(parent.getContext()).inflate(R.layout.category_products_view, parent,false);
-        return new CategoryProductsAdapter.CustomViewHolder(root);
+    public SearchResultsAdapter.CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View root = LayoutInflater.from(parent.getContext()).inflate(R.layout.category_products_view, parent, false);
+        return new SearchResultsAdapter.CustomViewHolder(root);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CategoryProductsAdapter.CustomViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull SearchResultsAdapter.CustomViewHolder holder, final int position) {
 
-        holder.productImage.getRootView() .setOnClickListener(new View.OnClickListener() {
+        holder.productImage.getRootView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                categoryProductsCommunication.onClick(dataList.get(position));
+                searchResultsCommunication.onClick(dataList.get(position));
             }
         });
 
@@ -46,8 +46,8 @@ public class CategoryProductsAdapter extends RecyclerView.Adapter<CategoryProduc
                 .into(holder.productImage);
 
         holder.productName.setText(dataList.get(position).getProductName());
-        holder.price.setText("Price: INR " + String.valueOf(dataList.get(position).getProductPrice()));
-        holder.rating.setText("Rating: " + String.valueOf(dataList.get(position).getProductRating()));
+        holder.price.setText(String.valueOf(dataList.get(position).getProductPrice()));
+        holder.rating.setText(String.valueOf(dataList.get(position).getProductRating()));
     }
 
     @Override
@@ -71,8 +71,9 @@ public class CategoryProductsAdapter extends RecyclerView.Adapter<CategoryProduc
         }
     }
 
-    public interface CategoryProductsCommunication{
+    public interface SearchResultsCommunication {
         void onClick(CategoryProducts products);
     }
-
 }
+
+

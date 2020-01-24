@@ -6,16 +6,16 @@ public class Merchant {
     @SerializedName("merchantName")
     private String merchantName;
     @SerializedName("merchantId")
-    private int merchantId;
-    @SerializedName("price")
-    private int price;
+    private String merchantId;
+    @SerializedName("productPrice")
+    private int productsPrice;
 
     @Override
     public String toString() {
         return "Merchant{" +
                 "merchantName='" + merchantName + '\'' +
                 ", merchantId=" + merchantId +
-                ", price=" + price +
+                ", productPrice=" + productsPrice +
                 '}';
     }
 
@@ -27,19 +27,19 @@ public class Merchant {
         this.merchantName = merchantName;
     }
 
-    public int getMerchantId() {
+    public String getMerchantId() {
         return merchantId;
     }
 
-    public void setMerchantId(int merchantId) {
+    public void setMerchantId(String merchantId) {
         this.merchantId = merchantId;
     }
 
-    public int getPrice() {
-        return price;
+    public int getProductsPrice() {
+        return productsPrice;
     }
 
-    public void setPrice(int price) {
-        this.price = price;
+    public void setProductsPrice(int productsPrice) {
+        this.productsPrice = productsPrice;
     }
 }

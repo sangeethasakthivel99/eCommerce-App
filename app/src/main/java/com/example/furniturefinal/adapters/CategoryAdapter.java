@@ -8,8 +8,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
 import com.example.furniturefinal.R;
-import com.example.furniturefinal.activities.HomeActivity;
 import com.example.furniturefinal.pojoclass.Categories;
 
 import java.util.List;
@@ -34,15 +35,16 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Custom
         @Override
         public void onBindViewHolder(@NonNull CustomViewHolder holder,final int position) {
 
-            holder.categoryName.getRootView() .setOnClickListener(new View.OnClickListener() {
+            holder.categoryImageUrl.getRootView() .setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     categoryCommunication.onClick(dataList.get(position));
                 }
             });
 
-            holder.categoryName.setText(dataList.get(position).getCategory_name());
-
+            holder.categoryName.setText(dataList.get(position).getCategoryName());
+            Glide.with(holder.categoryImageUrl.getContext()).load(dataList.get(position).getCategoryImageUrl())
+                    .into(holder.categoryImageUrl);
         }
 
         @Override
@@ -52,12 +54,13 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Custom
 
         class CustomViewHolder extends RecyclerView.ViewHolder {
             TextView categoryName;
+            ImageView categoryImageUrl;
 
             public CustomViewHolder(@NonNull View itemView) {
                 super(itemView);
 
-                categoryName = itemView.findViewById(R.id.category);
-
+                categoryName = itemView.findViewById(R.id.categoryName);
+                categoryImageUrl = itemView.findViewById(R.id.categoryImageUrl);
 
             }
         }

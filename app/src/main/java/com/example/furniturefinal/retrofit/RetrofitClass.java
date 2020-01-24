@@ -12,7 +12,7 @@ public class RetrofitClass {
 
         if (retrofit == null)
             retrofit = new Retrofit.Builder()
-                    .baseUrl("http://demo7203549.mockable.io/")
+                    .baseUrl("http://10.177.68.26:8111/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .client(client)
                     .build();
