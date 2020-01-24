@@ -41,7 +41,7 @@ public class MerchantDisplayInProductPageAdapter extends RecyclerView.Adapter<Me
                 merchantDisplayInProductPageCommunication.onClick(dataList.get(position));
             }
         });
-        holder.merchantDetails.setText(dataList.get(position).getMerchantName()+": " + String.valueOf(dataList.get(position).getPrice()));
+        holder.merchantDetails.setText(dataList.get(position).getMerchantName()+": " + String.valueOf(dataList.get(position).getProductsPrice()));
 
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override

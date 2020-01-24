@@ -8,35 +8,32 @@ import java.util.Map;
 public class Products {
     @SerializedName("productId")
     private int productId;
-    @SerializedName("merchantId")
-    private int merchantId;
     @SerializedName("productName")
     private String productName;
-    @SerializedName("price")
-    private int price;
-    @SerializedName("description")
+    @SerializedName("productPrice")
+    private int productPrice;
+    @SerializedName("productDescription")
     private String description;
-    @SerializedName("image")
-    private String image;
-    @SerializedName("attributes")
-    private Map<String, String> attributes;
+    @SerializedName("imageUrl")
+    private String imageUrl;
+    @SerializedName("productAttributes")
+    private Map<String, String> productAttributes;
     @SerializedName("productRating")
     private int productRating;
-    @SerializedName("otherMerchants")
-    private List<Merchant> otherMerchants;
+    @SerializedName("merchantList")
+    private List<Merchant> merchantList;
 
     @Override
     public String toString() {
         return "Products{" +
                 "productId=" + productId +
-                ", merchantId=" + merchantId +
                 ", productName='" + productName + '\'' +
-                ", price=" + price +
+                ", productPrice=" + productPrice +
                 ", description='" + description + '\'' +
-                ", image='" + image + '\'' +
-                ", attributes=" + attributes +
+                ", imageUrl='" + imageUrl + '\'' +
+                ", productAttributes=" + productAttributes +
                 ", productRating=" + productRating +
-                ", otherMerchants=" + otherMerchants +
+                ", merchantList=" + merchantList +
                 '}';
     }
 
@@ -48,14 +45,6 @@ public class Products {
         this.productId = productId;
     }
 
-    public int getMerchantId() {
-        return merchantId;
-    }
-
-    public void setMerchantId(int merchantId) {
-        this.merchantId = merchantId;
-    }
-
     public String getProductName() {
         return productName;
     }
@@ -64,12 +53,12 @@ public class Products {
         this.productName = productName;
     }
 
-    public int getPrice() {
-        return price;
+    public int getProductPrice() {
+        return productPrice;
     }
 
-    public void setPrice(int price) {
-        this.price = price;
+    public void setProductPrice(int productPrice) {
+        this.productPrice = productPrice;
     }
 
     public String getDescription() {
@@ -80,20 +69,20 @@ public class Products {
         this.description = description;
     }
 
-    public String getImage() {
-        return image;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
-    public Map<String, String> getAttributes() {
-        return attributes;
+    public Map<String, String> getProductAttributes() {
+        return productAttributes;
     }
 
-    public void setAttributes(Map<String, String> attributes) {
-        this.attributes = attributes;
+    public void setProductAttributes(Map<String, String> productAttributes) {
+        this.productAttributes = productAttributes;
     }
 
     public int getProductRating() {
@@ -104,11 +93,11 @@ public class Products {
         this.productRating = productRating;
     }
 
-    public List<Merchant> getOtherMerchants() {
-        return otherMerchants;
+    public List<Merchant> getMerchantList() {
+        return merchantList;
     }
 
-    public void setOtherMerchants(List<Merchant> otherMerchants) {
-        this.otherMerchants = otherMerchants;
+    public void setMerchantList(List<Merchant> merchantList) {
+        this.merchantList = merchantList;
     }
 }

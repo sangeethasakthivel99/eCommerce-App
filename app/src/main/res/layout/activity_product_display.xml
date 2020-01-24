@@ -18,7 +18,7 @@
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/productImage"
+                android:id="@+id/imageUrl"
                 android:layout_width="match_parent"
                 android:layout_height="330dp"
                 android:layout_margin="10dp">
@@ -47,7 +47,6 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Price: "
                     android:textSize="30dp"
                     android:id="@+id/productPrice"
                     android:gravity="left"
@@ -62,13 +61,13 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/attributes"
+                android:id="@+id/productAttributes"
                 android:textSize="20dp"
                 />
             </LinearLayout>
                 <androidx.recyclerview.widget.RecyclerView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="84dp"
                     android:id="@+id/merchant_recycler_view"
                     />
 
