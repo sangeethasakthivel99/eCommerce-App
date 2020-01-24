@@ -46,8 +46,8 @@ public class CategoryProductsAdapter extends RecyclerView.Adapter<CategoryProduc
                 .into(holder.productImage);
 
         holder.productName.setText(dataList.get(position).getProductName());
-        holder.price.setText(String.valueOf(dataList.get(position).getProductPrice()));
-        holder.rating.setText(String.valueOf(dataList.get(position).getProductRating()));
+        holder.price.setText("Price: INR " + String.valueOf(dataList.get(position).getProductPrice()));
+        holder.rating.setText("Rating: " + String.valueOf(dataList.get(position).getProductRating()));
     }
 
     @Override

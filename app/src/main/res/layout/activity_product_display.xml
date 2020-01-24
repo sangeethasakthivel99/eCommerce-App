@@ -47,7 +47,6 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Price: "
                     android:textSize="30dp"
                     android:id="@+id/productPrice"
                     android:gravity="left"
@@ -68,7 +67,7 @@
             </LinearLayout>
                 <androidx.recyclerview.widget.RecyclerView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="84dp"
                     android:id="@+id/merchant_recycler_view"
                     />
 

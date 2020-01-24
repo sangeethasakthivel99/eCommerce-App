@@ -95,7 +95,7 @@ public class DisplayProductActivity extends AppCompatActivity implements Merchan
                             .into(image);
                     productName.setText(response.body().getData().getProduct().getProductName());
                     ratingBar.setRating(response.body().getData().getProduct().getProductRating());
-                    price.setText(String.valueOf(response.body().getData().getProduct().getProductPrice()));
+                    price.setText("Price: " + String.valueOf(response.body().getData().getProduct().getProductPrice()));
 
                     productDescription.setText(response.body().getData().getProduct().getDescription());
                     Map<String, String> getAttributes = response.body().getData().getProduct().getProductAttributes();
