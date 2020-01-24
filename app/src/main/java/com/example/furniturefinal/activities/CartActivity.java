@@ -2,6 +2,7 @@ package com.example.furniturefinal.activities;
 
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
@@ -16,6 +17,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.furniturefinal.pojoclass.CartModel;
 import com.example.furniturefinal.R;
 import com.example.furniturefinal.adapters.DisplayCartAdapter;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +32,7 @@ public class CartActivity extends AppCompatActivity  {
     private Button decrease;
     private TextView textCount;
     private List<CartModel> list;
+    private FirebaseAuth auth;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -51,15 +55,23 @@ public class CartActivity extends AppCompatActivity  {
             adapter = new DisplayCartAdapter(this, list);
             recyclerView.setAdapter(adapter);
         }
+        auth = FirebaseAuth.getInstance();
+        final FirebaseUser firebaseUser = auth.getCurrentUser();
         Button checkout = findViewById(R.id.checkout);
         checkout.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                displayAlert();
+                if (firebaseUser == null) {
+                    Intent intent = new Intent(CartActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                } else {
+                    Intent intent = new Intent(CartActivity.this, ShipActivity.class);
+                }
+                //  displayAlert();
                 return false;
             }
 
-            public void displayAlert() {
+            /*public void displayAlert() {
                 new AlertDialog.Builder(CartActivity.this).setMessage("Check Your Mail")
                         .setTitle("Email Invoice")
                         .setCancelable(true)
@@ -70,35 +82,9 @@ public class CartActivity extends AppCompatActivity  {
                                     }
                                 })
                         .show();
-            }
+            }*/
         });
     }
-/*
-    @Override
-    public void incrementButton() {
-        increment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                count++;
-                textCount.setText(String.valueOf(count));
-
-            }
-        });
-    }
-
-    @Override
-    public void decrementButton() {
-        decrease.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                count--;
-                textCount.setText(String.valueOf(count));
-
-            }
-        });
-
-    }
-    */
 
 
 }
