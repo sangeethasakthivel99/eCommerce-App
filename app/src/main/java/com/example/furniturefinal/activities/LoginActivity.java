@@ -1,5 +1,6 @@
 package com.example.furniturefinal.activities;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -50,7 +51,7 @@ public class LoginActivity extends AppCompatActivity {
     ProgressBar progressBar;
     FirebaseAuth auth;
     TextView new_user_tv;
-    private SignInButton signInButton;
+    private Button signInButton;
     GoogleSignInClient googleSignInClient;
     private int RC_SIGN_IN = 1;
     private String TAG = "LoginActivity";
@@ -59,6 +60,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
 
+    @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

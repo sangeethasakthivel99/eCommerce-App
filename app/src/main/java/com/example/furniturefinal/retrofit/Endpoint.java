@@ -5,7 +5,8 @@ import com.example.furniturefinal.pojoclass.CategoryProducts;
 import com.example.furniturefinal.pojoclass.PopularProducts;
 import com.example.furniturefinal.pojoclass.ProductDetailResponse;
 import com.example.furniturefinal.pojoclass.ResponseDto;
-import com.example.furniturefinal.viewHolder.CartModel;
+import com.example.furniturefinal.pojoclass.Products;
+import com.example.furniturefinal.pojoclass.CartModel;
 
 import java.util.List;
 

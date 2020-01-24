@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">FurnitureFinal</string>
     <string name="log_status">Log Out</string>
 
     <string name="facebook_app_id">115674826430221</string>
@@ -8,4 +7,6 @@
     <string name="home_page_categories">Select from our collection</string>
     <string name="popular_products">Our range of popular products</string>
     <string name="search_results">What we think you\'ll love</string>
+    <string name="app_name">Lakdi</string>
+
 </resources>

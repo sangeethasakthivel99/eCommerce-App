@@ -2,7 +2,10 @@ package com.example.furniturefinal.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.ScaleGestureDetector;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
@@ -21,7 +24,7 @@ import com.example.furniturefinal.pojoclass.ProductDetailResponse;
 import com.example.furniturefinal.pojoclass.ResponseDto;
 import com.example.furniturefinal.retrofit.Endpoint;
 import com.example.furniturefinal.retrofit.RetrofitClass;
-import com.example.furniturefinal.viewHolder.CartModel;
+import com.example.furniturefinal.pojoclass.CartModel;
 
 import java.util.List;
 import java.util.Map;
@@ -29,6 +32,8 @@ import java.util.Map;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 
 public class DisplayProductActivity extends AppCompatActivity implements MerchantDisplayInProductPageAdapter.MerchantDisplayInProductPageCommunication{
     private MerchantDisplayInProductPageAdapter merchantDisplayInProductPageAdapter;
@@ -115,7 +120,7 @@ public class DisplayProductActivity extends AppCompatActivity implements Merchan
        addToCart.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
-               Intent intent=new Intent(DisplayProductActivity.this,CartActivity.class);
+               Intent intent=new Intent(DisplayProductActivity.this, CartActivity.class);
                startActivity(intent);
            }
        });
