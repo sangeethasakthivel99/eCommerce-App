@@ -110,6 +110,13 @@ AlertDialog.Builder builder;
                 startActivity(intent);
             }
         });
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(UserActivity.this,HomeActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 

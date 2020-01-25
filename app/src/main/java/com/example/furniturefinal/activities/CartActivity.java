@@ -71,6 +71,7 @@ public class CartActivity extends AppCompatActivity  {
                     startActivity(intent);
                 } else {
                     Intent intent = new Intent(CartActivity.this, ShipActivity.class);
+                    startActivity(intent);
                 }
                 //  displayAlert();
                 return false;
