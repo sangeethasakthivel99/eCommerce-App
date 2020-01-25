@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.OrderHistoryActivity"
+    tools:ignore="NamespaceTypo"
+    android:background="@drawable/background">
+
+    <TextView
+        android:id="@+id/order_date"
+        android:layout_width="307dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="45dp"
+        android:layout_marginBottom="642dp"
+        android:background="@drawable/layer"
+        android:fontFamily="@font/acme"
+        android:gravity="center"
+        android:text="Order Date"
+        android:textSize="30sp">
+
+    </TextView>
+
+
+    <TextView
+        android:fontFamily="@font/acme"
+        android:id="@+id/get_order_date"
+        android:layout_width="318dp"
+        android:layout_height="61dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="537dp"
+        android:gravity="center"
+        android:textColor="#fff"
+        android:text="eg:12/11/2019"
+        android:textSize="30sp">
+
+    </TextView>
+
+    <TextView
+        android:id="@+id/quantity"
+        android:layout_width="wrap_content"
+        android:layout_height="31dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="33dp"
+        android:layout_marginTop="247dp"
+        android:layout_marginEnd="35dp"
+        android:layout_marginBottom="435dp"
+        android:background="@drawable/layer"
+        android:fontFamily="@font/acme"
+        android:gravity="center"
+        android:text="Quantity"
+        android:textSize="30sp">
+
+    </TextView>
+
+    <TextView
+        android:id="@+id/get_quantity"
+        android:layout_width="325dp"
+        android:layout_height="47dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="34dp"
+        android:layout_marginTop="321dp"
+        android:layout_marginEnd="35dp"
+        android:layout_marginBottom="345dp"
+        android:fontFamily="@font/acme"
+        android:gravity="center"
+        android:text="eg.2"
+        android:textColor="#fff"
+        android:textSize="30sp">
+
+    </TextView>
+
+    <Button
+        android:fontFamily="@font/acme"
+        android:layout_width="186dp"
+        android:id="@+id/back_button"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="99dp"
+        android:layout_marginBottom="203dp"
+        android:background="#F01E1E"
+        android:text="Back"
+        android:textSize="20sp"
+        android:textColor="#fff" />
+
+
+</RelativeLayout>

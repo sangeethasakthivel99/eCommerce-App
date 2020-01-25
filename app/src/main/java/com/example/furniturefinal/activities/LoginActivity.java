@@ -1,6 +1,5 @@
 package com.example.furniturefinal.activities;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -51,16 +50,13 @@ public class LoginActivity extends AppCompatActivity {
     ProgressBar progressBar;
     FirebaseAuth auth;
     TextView new_user_tv;
-    private Button signInButton;
+    private SignInButton signInButton;
     GoogleSignInClient googleSignInClient;
     private int RC_SIGN_IN = 1;
     private String TAG = "LoginActivity";
     private CallbackManager myCallbackManager;
 
 
-
-
-    @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,7 +64,7 @@ public class LoginActivity extends AppCompatActivity {
         Toast.makeText(this, this.getClass().getName(), Toast.LENGTH_SHORT).show();
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
-        progressBar = findViewById(R.id.progressBar);
+        //progressBar = findViewById(R.id.progressBar);
         signin = findViewById(R.id.button_signIn);
         new_user_tv = findViewById(R.id.new_user_tv);
         auth = FirebaseAuth.getInstance();
@@ -136,7 +132,7 @@ public class LoginActivity extends AppCompatActivity {
                     email.setError("Email is Required");
                     return;
                 }
-                if(TextUtils.isEmpty(myPassword)){
+                if (TextUtils.isEmpty(myPassword)) {
                     password.setError("Password is Required");
                     return;
                 }
@@ -170,21 +166,20 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
             }
         });
-        myCallbackManager=CallbackManager.Factory.create();
+        myCallbackManager = CallbackManager.Factory.create();
         LoginButton loginButton = findViewById(R.id.buttonFacebookLogin);
         loginButton.setReadPermissions("email", "public_profile");
         loginButton.registerCallback(myCallbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 Log.d(TAG, "facebook:onSuccess:" + loginResult);
-                updateUI();
+               // updateUI();
                 handleFacebookAccessToken(loginResult.getAccessToken());
             }
 
             @Override
             public void onCancel() {
                 Log.d(TAG, "facebook:onCancel");
-                // ...
             }
 
             @Override
@@ -199,36 +194,34 @@ public class LoginActivity extends AppCompatActivity {
 //            finish();
 //        }
     }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        myCallbackManager.onActivityResult(requestCode,resultCode,data);
+        if (requestCode == RC_SIGN_IN) {
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            handleSignInResult(task);
+        }
+    }
+
 
     @Override
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = auth.getCurrentUser();
-        if(currentUser!=null) {
-            updateUI();
+        if (currentUser != null) {
+            updateUI(currentUser);
         }
     }
 
     private void updateUI() {
-        Toast.makeText(LoginActivity.this,"Logged in Successfully",Toast.LENGTH_LONG).show();
-        Intent intent=new Intent(LoginActivity.this,HomeActivity.class);
+        Toast.makeText(LoginActivity.this, "Logged in Successfully", Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
         startActivity(intent);
         finish();
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        // Pass the activity result back to the Facebook SDK
-        myCallbackManager.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == RC_SIGN_IN) {
-            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            handleSignInResult(task);
-        }
-    }
     private void handleFacebookAccessToken(AccessToken token) {
         Log.d(TAG, "handleFacebookAccessToken:" + token);
 
@@ -241,17 +234,18 @@ public class LoginActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = auth.getCurrentUser();
-                            updateUI();
+                            updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
                             Toast.makeText(LoginActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
-                            updateUI();
+                            updateUI(null);
                         }
                     }
                 });
     }
+
     private void signin() {
         Intent intent = googleSignInClient.getSignInIntent();
         startActivityForResult(intent, RC_SIGN_IN);
@@ -267,7 +261,7 @@ public class LoginActivity extends AppCompatActivity {
             GoogleSignInAccount googleSignInAccount = completedTask.getResult(ApiException.class);
             Toast.makeText(LoginActivity.this, "Signed in Successfully", Toast.LENGTH_LONG).show();
             FirebaseGoogleAuth(googleSignInAccount);
-            Intent intent=new Intent(LoginActivity.this,HomeActivity.class);
+            Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
             startActivity(intent);
             finish();
         } catch (ApiException e) {

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@drawable/background">
@@ -89,7 +90,6 @@
         android:layout_marginRight="15dp"
         android:background="#F01E1E"
         android:clickable="true"
-
         android:fontFamily="@font/artifika"
         android:text="Login" />
     <LinearLayout
@@ -105,28 +105,30 @@
         android:layout_marginTop="20dp"
         android:dividerPadding="5dp"
         android:layout_centerHorizontal="true">
-        <ImageButton
+
+        <com.facebook.login.widget.DeviceLoginButton
             android:id="@+id/buttonFacebookLogin"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="391dp"
+            android:layout_height="182dp"
+            android:layout_marginRight="2dp"
             android:layout_weight="1"
-            android:src="@drawable/fb"
             android:background="#BA18C0DD"
             android:paddingTop="12dp"
-            android:paddingBottom="12dp"
-            android:layout_marginRight="2dp"/>
+            android:paddingBottom="25dp"
+            android:layout_gravity="bottom"
+            android:src="@drawable/fb" />
 
-
-        <ImageButton
+        <com.google.android.gms.common.SignInButton
             android:id="@+id/google"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="376dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginLeft="2dp"
             android:layout_weight="1"
-            android:paddingTop="12dp"
+            android:paddingTop="25dp"
             android:paddingBottom="12dp"
-            android:background="#BA18C0DD"
             android:src="@drawable/google"
-            android:layout_marginLeft="2dp"/>
+            android:textAlignment="center" />
     </LinearLayout>
 
     <TextView
@@ -134,7 +136,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/l_socialButtonsContainer"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="93dp"
         android:gravity="center_horizontal"
         android:text="Don't have an account?"
         android:textAppearance="?android:attr/textAppearanceSmall"

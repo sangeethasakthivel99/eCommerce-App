@@ -1,92 +1,132 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.UserActivity">
+    tools:context=".activities.UserActivity"
+    android:background="@drawable/background">
+
     <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:background="@drawable/layer">
+                android:background="@drawable/layer"
+                android:orientation="vertical">
 
                 <Button
                     android:id="@+id/imageButton"
-                    android:layout_width="208dp"
-                    android:layout_height="196dp"
+                    android:layout_width="212dp"
+                    android:layout_height="240dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="50px"
                     android:layout_marginBottom="50px"
                     android:background="@drawable/icon"></Button>
 
-                <EditText
-                    android:id="@+id/editName"
-                    android:layout_width="339dp"
-                    android:layout_height="71dp"
-                    android:hint="User Name"
-                    android:maxLines="1"
-                    android:layout_gravity="center"
-                    android:textSize="30sp"
-                    android:textStyle="bold"></EditText>
+
             </LinearLayout>
         </LinearLayout>
 
         <EditText
+            android:id="@+id/editName"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="#FFFFFF"
+            android:ems="10"
+            android:fontFamily="@font/acme"
+            android:hint="Name"
+            android:inputType="textPersonName"
+            android:padding="12dp"
+            android:singleLine="false"
+            android:textColor="#000000"
+            android:textColorHint="#42000000"></EditText>
+
+        <EditText
             android:id="@+id/editEmail"
-            android:layout_width="339dp"
-            android:layout_height="71dp"
-            android:hint="Email"
-            android:layout_gravity="center"
-            android:textSize="18sp"
-            android:maxLines="1"
-            tools:ignore="MissingConstraints"></EditText>
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="#FFFFFF"
+            android:ems="10"
+            android:fontFamily="@font/acme"
+            android:hint="Email Id"
+            android:inputType="textPersonName"
+            android:padding="12dp"
+            android:singleLine="false"
+            android:textColor="#000000"
+            android:textColorHint="#42000000"></EditText>
+
         <EditText
             android:id="@+id/editAddress"
-            android:layout_width="339dp"
-            android:layout_height="71dp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="#FFFFFF"
+            android:ems="10"
+            android:fontFamily="@font/acme"
             android:hint="Address"
-            android:layout_gravity="center"
-            android:maxLines="1"
-            android:textSize="18sp"
-            android:textStyle="bold"></EditText>
+            android:inputType="textPersonName"
+            android:padding="12dp"
+            android:singleLine="false"
+            android:textColor="#000000"
+            android:textColorHint="#42000000"></EditText>
 
         <EditText
             android:id="@+id/editPhoneNumber"
-            android:layout_width="338dp"
-            android:layout_height="84dp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="#FFFFFF"
             android:ems="10"
-            android:maxLines="1"
-            android:layout_gravity="center"
+            android:fontFamily="@font/acme"
             android:hint="Contact Number"
-            android:inputType="phone" />
+            android:inputType="phone"
+            android:padding="12dp"
+            android:singleLine="false"
+            android:textColor="#000000"
+            android:textColorHint="#42000000" />
+
         <EditText
             android:id="@+id/editPassword"
-            android:layout_width="339dp"
-            android:layout_height="71dp"
-            android:layout_gravity="center"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="#FFFFFF"
+            android:ems="10"
+            android:fontFamily="@font/acme"
             android:hint="Password"
-            android:maxLines="1"
-            android:textSize="18sp"
-            android:textStyle="bold"></EditText>
+            android:inputType="textPersonName"
+            android:padding="12dp"
+            android:singleLine="false"
+            android:textColor="#000000"
+            android:textColorHint="#42000000"></EditText>
 
         <Button
             android:id="@+id/save"
-            android:layout_width="158dp"
-            android:layout_height="67dp"
+            android:layout_width="387dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:background="#F01E1E"
             android:text="Save"
-            android:background="@drawable/background_shape"
-            android:textSize="22sp">
+            android:textSize="22sp"
+            android:fontFamily="@font/artifika"
+            tools:ignore="MissingConstraints">
 
         </Button>
+
+
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
