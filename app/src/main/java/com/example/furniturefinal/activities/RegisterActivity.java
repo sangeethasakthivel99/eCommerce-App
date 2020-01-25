@@ -1,17 +1,16 @@
 package com.example.furniturefinal.activities;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.furniturefinal.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -24,7 +23,7 @@ public class RegisterActivity extends AppCompatActivity {
     EditText name,email,password;
     Button  register;
     FirebaseAuth auth;
-    ProgressBar progressBar;
+    //ProgressBar progressBar;
     TextView already_login;
 
     @Override
@@ -36,7 +35,7 @@ public class RegisterActivity extends AppCompatActivity {
         email=findViewById(R.id.email);
         password=findViewById(R.id.password);
         register=findViewById(R.id.button_register);
-        progressBar=findViewById(R.id.progressBar);
+       // progressBar=findViewById(R.id.progressBar);
         already_login=findViewById(R.id.already_registered_tv);
         auth=FirebaseAuth.getInstance();
         if(auth.getCurrentUser()!=null){
@@ -63,18 +62,19 @@ public class RegisterActivity extends AppCompatActivity {
                     return;
                 }
 
-                progressBar.setVisibility(View.VISIBLE);
+               // progressBar.setVisibility(View.VISIBLE);
 
                 auth.createUserWithEmailAndPassword(myEmail,myPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             Toast.makeText(RegisterActivity.this, "User Created", Toast.LENGTH_LONG).show();
-                            startActivity(new Intent(getApplicationContext(),LoginActivity.class));
+                            Intent intent =new Intent(getApplicationContext(),HomeActivity.class);
+                            startActivity(intent);
                         }
                         else{
                             Toast.makeText(RegisterActivity.this,"Error!" +task.getException().getMessage(),Toast.LENGTH_LONG).show();
-                            progressBar.setVisibility(View.GONE);
+                            //progressBar.setVisibility(View.GONE);
                         }
                     }
                 });

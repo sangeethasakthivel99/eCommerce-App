@@ -21,8 +21,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activities.ShipActivity"></activity>
-        <activity android:name=".activities.SearchResultsActivity"></activity>
+        <activity android:name=".activities.OrderHistoryActivity"></activity>
+        <activity android:name=".activities.ShipActivity" />
+        <activity android:name=".activities.SearchResultsActivity" />
         <activity android:name=".activities.CaptureImage" />
         <activity android:name=".activities.DisplayCategoryProductsActivity" />
         <activity android:name=".activities.RegisterActivity" />

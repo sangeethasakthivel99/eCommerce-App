@@ -90,19 +90,18 @@
                                 android:layout_width="50dp"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="left"
-                                android:text="+"
+                                android:background="@drawable/plus"
                                 android:textSize="25sp"
-                                android:textStyle="bold"
-                               />
+                                android:textStyle="bold" />
 
                             <Button
                                 android:id="@+id/decrease"
                                 android:layout_width="50dp"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="right"
-                                android:text="-"
-                                android:textStyle="bold"
-                                android:textSize="25sp"/>
+                                android:background="@drawable/minus"
+                                android:textSize="25sp"
+                                android:textStyle="bold" />
 
                         </LinearLayout>
                     </LinearLayout>

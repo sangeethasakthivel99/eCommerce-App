@@ -3,9 +3,9 @@ package com.example.furniturefinal.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.SearchView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -41,7 +41,9 @@ public class HomeActivity extends AppCompatActivity implements PopularProductsAd
     private FirebaseAuth auth;
 
     private TextView loginStatus;
+    private TextView order;
     private SearchView searchView;
+    private ImageButton cart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +51,8 @@ public class HomeActivity extends AppCompatActivity implements PopularProductsAd
         setContentView(R.layout.activity_home);
 
         Endpoint service = RetrofitClass.getRetrofit().create(Endpoint.class);
+        order=findViewById(R.id.order_history);
+        cart=findViewById(R.id.cart);
 
 //        Call<List<Categories>> categories = service.getCategories();
 //
@@ -73,7 +77,7 @@ public class HomeActivity extends AppCompatActivity implements PopularProductsAd
 
             @Override
             public void onFailure(Call<ResponseDto<List<Categories>>> call, Throwable t) {
-                Toast.makeText(HomeActivity.this, "Failed1", Toast.LENGTH_SHORT).show();
+               // Toast.makeText(HomeActivity.this, "Failed1", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -86,7 +90,7 @@ public class HomeActivity extends AppCompatActivity implements PopularProductsAd
 
             @Override
             public void onFailure(Call<ResponseDto<List<PopularProducts>>> call, Throwable t) {
-                Toast.makeText(HomeActivity.this, "Failed2", Toast.LENGTH_LONG).show();
+               // Toast.makeText(HomeActivity.this, "Failed2", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -137,6 +141,21 @@ public class HomeActivity extends AppCompatActivity implements PopularProductsAd
             public void onClick(View view) {
                 auth.signOut();
                 Intent intent = new Intent(HomeActivity.this, UserActivity.class);
+                startActivity(intent);
+            }
+        });
+        order.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(HomeActivity.this,OrderHistoryActivity.class);
+                startActivity(intent);
+
+            }
+        });
+        cart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(HomeActivity.this,CartActivity.class);
                 startActivity(intent);
             }
         });
