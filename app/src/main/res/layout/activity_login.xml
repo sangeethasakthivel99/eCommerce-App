@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@drawable/background">
@@ -12,14 +11,12 @@
         android:src="@drawable/appicon"
         android:layout_marginTop="30dp"
         android:layout_marginBottom="20dp"/>
-
     <TextView
         android:id="@+id/appName"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/appLogo"
         android:layout_marginTop="5dp"
-
         android:fontFamily="@font/crafty_girls"
         android:gravity="center_horizontal"
         android:text="@string/app_name"
@@ -27,7 +24,6 @@
         android:textColor="#BA18C0DD"
         android:textSize="35sp"
         android:textStyle="bold" />
-
     <TextView
         android:id="@+id/appDescription"
         android:layout_width="fill_parent"
@@ -35,13 +31,11 @@
         android:layout_below="@id/appName"
         android:layout_marginBottom="20dp"
         android:fontFamily="@font/arizonia"
-
         android:gravity="center_horizontal"
         android:text="Crafted With Excellence"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#F01E1E"
         android:textSize="20sp" />
-
     <EditText
         android:id="@+id/email"
         android:layout_width="fill_parent"
@@ -52,7 +46,6 @@
         android:layout_marginRight="15dp"
         android:background="#FFFFFF"
         android:ems="10"
-
         android:fontFamily="@font/acme"
         android:hint="Email Id"
         android:inputType="textPersonName"
@@ -60,7 +53,6 @@
         android:singleLine="false"
         android:textColor="#000000"
         android:textColorHint="#42000000" />
-
     <EditText
         android:id="@+id/password"
         android:layout_width="fill_parent"
@@ -72,14 +64,12 @@
         android:layout_marginBottom="5dp"
         android:background="#FFFFFF"
         android:ems="10"
-
         android:fontFamily="@font/acme"
         android:hint="Password"
         android:inputType="textPassword"
         android:padding="12dp"
         android:textColor="#000000"
         android:textColorHint="#42000000" />
-
     <Button
         android:id="@+id/button_signIn"
         android:layout_width="fill_parent"
@@ -105,7 +95,6 @@
         android:layout_marginTop="20dp"
         android:dividerPadding="5dp"
         android:layout_centerHorizontal="true">
-
         <com.facebook.login.widget.DeviceLoginButton
             android:id="@+id/buttonFacebookLogin"
             android:layout_width="391dp"
@@ -117,7 +106,6 @@
             android:paddingBottom="25dp"
             android:layout_gravity="bottom"
             android:src="@drawable/fb" />
-
         <com.google.android.gms.common.SignInButton
             android:id="@+id/google"
             android:layout_width="376dp"
@@ -130,7 +118,6 @@
             android:src="@drawable/google"
             android:textAlignment="center" />
     </LinearLayout>
-
     <TextView
         android:id="@+id/new_user_tv"
         android:layout_width="fill_parent"
@@ -142,5 +129,4 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="#FFFFFF"
         android:textSize="16dp" />
-
 </RelativeLayout>
