@@ -164,7 +164,7 @@ public class DisplayProductActivity extends AppCompatActivity implements Merchan
                CartProduct cartProduct = new CartProduct();
                cartProduct.setProductId(productId);
                cartProduct.setMerchantId(merchantId);
-               cartProduct.setPrice(merchantProductPrice);
+               cartProduct.setPrice(merchantProductPrice * Integer.parseInt(textCount.getText().toString()));
                cartProduct.setQuantityBrought(Integer.parseInt(textCount.getText().toString()));
                cartProduct.setImageUrl(imageUrl);
                cartProduct.setProductName(productNameSave);

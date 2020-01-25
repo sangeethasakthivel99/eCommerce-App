@@ -66,7 +66,14 @@ public class DisplayCartAdapter extends RecyclerView.Adapter<DisplayCartAdapter.
 //                count++;
                 cartList.get(index).setQuantityBrought(cartList.get(index).getQuantityBrought() + 1);
                 holder.textCount.setText(String.valueOf(cartList.get(index).getQuantityBrought()));
-
+                cartProductDAO = database.getCartProductDAO();
+                CartProduct product = cartProductDAO.getItemById(cartList.get(index).getProductId(), cartList.get(index).getMerchantId());
+                product.setPrice((product.getPrice()/product.getQuantityBrought()) * (product.getQuantityBrought() + 1));
+                product.setQuantityBrought(product.getQuantityBrought() + 1);
+                cartProductDAO.update(product);
+                cartList.set(position, product);
+                cartList.get(position).setQuantityBrought(product.getQuantityBrought());
+                notifyItemChanged(position);
             }
         });
 
@@ -79,6 +86,14 @@ public class DisplayCartAdapter extends RecyclerView.Adapter<DisplayCartAdapter.
                 if (cartList.get(index).getQuantityBrought() > 1) {
                     cartList.get(index).setQuantityBrought(cartList.get(index).getQuantityBrought() - 1);
                     holder.textCount.setText(String.valueOf(cartList.get(index).getQuantityBrought()));
+
+                    CartProduct product = cartProductDAO.getItemById(cartList.get(index).getProductId(), cartList.get(index).getMerchantId());
+                    product.setPrice((product.getPrice()/product.getQuantityBrought()) * (product.getQuantityBrought() - 1));
+                    product.setQuantityBrought(product.getQuantityBrought() - 1);
+                    cartProductDAO.update(product);
+                    cartList.set(position, product);
+                    cartList.get(position).setQuantityBrought(product.getQuantityBrought());
+                    notifyItemChanged(position);
                 }
                 else if(cartList.get(index).getQuantityBrought() == 1)
                 {
