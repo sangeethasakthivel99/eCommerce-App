@@ -15,7 +15,8 @@
         android:layout_alignParentBottom="true"
         android:id="@+id/checkout"
         android:background="#F01E1E"
-        android:text="Checkout">
+        android:text="Checkout"
+        android:fontFamily="@font/artifika">
 
     </Button>
 

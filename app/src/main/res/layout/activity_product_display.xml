@@ -32,10 +32,12 @@
                <TextView
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content"
-                   android:textSize="30dp"
+                   android:textSize="20sp"
                    android:id="@+id/productName"
                    android:gravity="center"
-                   android:textStyle="bold">
+                   android:textStyle="bold"
+                   android:fontFamily="@font/artifika"
+                   android:textColor="#F01E1E">
                </TextView>
            </LinearLayout>
 
@@ -47,10 +49,11 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="30dp"
+                    android:textSize="20sp"
                     android:id="@+id/productPrice"
                     android:gravity="left"
-                    android:textStyle="bold">
+                    android:textStyle="bold"
+                android:fontFamily="@font/artifika">
                 </TextView>
             </LinearLayout>
             <LinearLayout
@@ -109,8 +112,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="56dp"
-                android:background="@drawable/background_shape"
-                android:orientation="horizontal">
+                android:background="#9EF01E1E"
+                android:orientation="horizontal"
+                android:layout_gravity="center">
 
 
                 <TextView
@@ -160,12 +164,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
-                    android:background="@drawable/background_shape"
+                    android:background="#F01E1E"
                     android:gravity="top|center"
                     android:text="ADD TO CART"
-                    android:textSize="30dp"
+                    android:textSize="25sp"
                     android:clickable="true"
-                    android:textStyle="bold"></Button>
+                    android:textStyle="bold"
+                    android:fontFamily="@font/artifika"></Button>
             </LinearLayout>
 
         </LinearLayout>

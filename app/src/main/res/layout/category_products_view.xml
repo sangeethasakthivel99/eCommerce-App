@@ -25,6 +25,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageUrl"
+        android:fontFamily="@font/artifika"
         android:gravity="center"/>
 
     <TextView
@@ -35,6 +36,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/productPrice"
+        android:fontFamily="@font/artifika"
         android:gravity="center"/>
 
     <TextView
@@ -47,6 +49,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/productName"
         app:layout_constraintVertical_bias="0.1"
+        android:fontFamily="@font/artifika"
         android:gravity="center"/>
 
 

@@ -7,8 +7,8 @@
 
     <ImageView
         android:id="@+id/imageUrl"
-        android:layout_width="144dp"
-        android:layout_height="144dp"
+        android:layout_width="187dp"
+        android:layout_height="170dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -18,14 +18,15 @@
 
     <TextView
         android:id="@+id/productName"
-        android:layout_width="97dp"
-        android:layout_height="48dp"
+        android:layout_width="124dp"
+        android:layout_height="67dp"
+        android:fontFamily="@font/artifika"
+        android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageUrl"
-        android:gravity="center"/>
+        app:layout_constraintTop_toBottomOf="@+id/imageUrl" />
 
     <TextView
         android:id="@+id/productRating"
@@ -35,7 +36,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/productPrice"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:fontFamily="@font/artifika"/>
 
     <TextView
         android:id="@+id/productPrice"
@@ -47,6 +49,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/productName"
         app:layout_constraintVertical_bias="0.1"
+        android:fontFamily="@font/artifika"
         android:gravity="center"/>
 
 

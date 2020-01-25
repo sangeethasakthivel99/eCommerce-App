@@ -2,6 +2,7 @@ package com.example.furniturefinal.activities;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -38,12 +39,14 @@ public class UserActivity extends AppCompatActivity {
  Button save;
  Button image_Button;
  ImageView imageUrl;
- String server_url="http://ip address/file name";
+ String server_url="";
 AlertDialog.Builder builder;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+        SharedPreferences.Editor editor = pref.edit();
         mname=findViewById(R.id.editName);
         memail=findViewById(R.id.editEmail);
        // password=findViewById(R.id.editPassword);
@@ -117,6 +120,12 @@ AlertDialog.Builder builder;
                 startActivity(intent);
             }
         });
+//        editor.putBoolean("name", mname);
+//        editor.putString("email", String.valueOf(memail));
+//        editor.putInt("address", maddress);
+//        editor.putFloat("contactNumber",mcontactNumber);
+//        editor.putLong("imageUrl",imageUrl);
+//        editor.commit();
 
     }
 

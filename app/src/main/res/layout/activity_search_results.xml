@@ -34,6 +34,7 @@
         android:textSize="28dp"
         android:gravity="center"
         android:layout_marginBottom="24dp"
+        android:fontFamily="@font/artifika"
         />
 
 
