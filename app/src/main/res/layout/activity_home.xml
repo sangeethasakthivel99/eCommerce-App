@@ -18,6 +18,7 @@
         android:clickable="true"
         android:focusable="true"
         android:text="@string/log_status"
+        android:fontFamily="@font/artifika"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
@@ -31,7 +32,8 @@
         android:focusable="true"
         android:text="Profile"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:fontFamily="@font/artifika"/>
 
     <ImageButton
         android:id="@+id/cart"
@@ -54,6 +56,7 @@
         android:clickable="true"
         android:focusable="true"
         android:text="Orders"
+        android:fontFamily="@font/artifika"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -61,7 +64,7 @@
         android:id="@+id/searchBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="24dp"
+        android:padding="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -100,7 +103,8 @@
         app:layout_constraintBottom_toTopOf="@+id/category_recycler_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchBar" />
+        app:layout_constraintTop_toBottomOf="@+id/searchBar"
+        android:fontFamily="@font/artifika"/>
 
     <TextView
         android:id="@+id/popular_products_text"
@@ -113,7 +117,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/category_recycler_view"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:fontFamily="@font/artifika"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

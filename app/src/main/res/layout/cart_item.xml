@@ -45,13 +45,15 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textSize="10dp"
-                            android:textStyle="bold"></TextView>
+                            android:textStyle="bold"
+                            android:fontFamily="@font/artifika"></TextView>
 
                         <TextView
                             android:id="@+id/productPrice"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            android:fontFamily="@font/artifika"/>
 
 
                     </LinearLayout>

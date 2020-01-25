@@ -175,10 +175,13 @@ public class DisplayProductActivity extends AppCompatActivity implements Merchan
                    product.setQuantityBrought(product.getQuantityBrought() + Integer.parseInt(textCount.getText().toString()));
                     cartProductDAO.update(product);
                }
-               else
-               cartProductDAO.insert(cartProduct);
-
-               startActivity(intent);
+               else if(merchantId != null) {
+                   cartProductDAO.insert(cartProduct);
+//                   if (merchantId != null)
+                       startActivity(intent);
+               }
+                else
+                    Toast.makeText(DisplayProductActivity.this, "Please select merchant!!", Toast.LENGTH_SHORT).show();
            }
        });
 

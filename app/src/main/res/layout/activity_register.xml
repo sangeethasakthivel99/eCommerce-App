@@ -101,7 +101,6 @@
         android:layout_weight="2"
         android:textStyle="bold"
         android:background="#F01E1E"
-        android:enabled="false"
         android:textSize="20sp"
         android:fontFamily="@font/artifika"
         android:text="Register" />

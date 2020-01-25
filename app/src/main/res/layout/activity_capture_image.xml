@@ -5,13 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="10dp">
+    android:padding="10dp"
+    android:background="@drawable/background">
 
     <Button
         android:id="@+id/btnSelectPhoto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/background_shape"
+        android:background="#F01E1E"
+        android:fontFamily="@font/artifika"
         android:text="Select Photo" />
 
     <ImageView
