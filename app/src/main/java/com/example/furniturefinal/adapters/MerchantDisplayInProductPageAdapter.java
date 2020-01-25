@@ -48,6 +48,7 @@ public class MerchantDisplayInProductPageAdapter extends RecyclerView.Adapter<Me
             public void onClick(View view) {
                 index = position;
                 notifyDataSetChanged();
+                merchantDisplayInProductPageCommunication.onClick(dataList.get(position));
             }
         });
 

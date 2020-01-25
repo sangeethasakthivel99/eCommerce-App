@@ -1,11 +1,9 @@
 package com.example.furniturefinal.activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.ScaleGestureDetector;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
@@ -15,16 +13,20 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
 
 import com.bumptech.glide.Glide;
 import com.example.furniturefinal.R;
 import com.example.furniturefinal.adapters.MerchantDisplayInProductPageAdapter;
+import com.example.furniturefinal.database.AppDatabase;
+import com.example.furniturefinal.database.CartProduct;
+import com.example.furniturefinal.database.CartProductDAO;
+import com.example.furniturefinal.pojoclass.CartModel;
 import com.example.furniturefinal.pojoclass.Merchant;
 import com.example.furniturefinal.pojoclass.ProductDetailResponse;
 import com.example.furniturefinal.pojoclass.ResponseDto;
 import com.example.furniturefinal.retrofit.Endpoint;
 import com.example.furniturefinal.retrofit.RetrofitClass;
-import com.example.furniturefinal.pojoclass.CartModel;
 
 import java.util.List;
 import java.util.Map;
@@ -32,8 +34,6 @@ import java.util.Map;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 
 public class DisplayProductActivity extends AppCompatActivity implements MerchantDisplayInProductPageAdapter.MerchantDisplayInProductPageCommunication{
     private MerchantDisplayInProductPageAdapter merchantDisplayInProductPageAdapter;
@@ -48,14 +48,22 @@ public class DisplayProductActivity extends AppCompatActivity implements Merchan
     private TextView productDescription;
     private List<CartModel> list;
     private TextView attibutes;
-
+    private Button increment;
+    private Button decrement;
+    private TextView textCount;
+    private String merchantId;
+    private int merchantProductPrice;
+    private SharedPreferences sharedPreferences;
+    private String imageUrl;
+    private CartProductDAO cartProductDAO;
+    private String productNameSave;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_display);
         Endpoint service = RetrofitClass.getRetrofit().create(Endpoint.class);
         Intent intent = getIntent();
-        String productId = intent.getStringExtra("productId");
+        final String productId = intent.getStringExtra("productId");
 
         image = findViewById(R.id.imageUrl);
         ratingBar = findViewById(R.id.rating);
@@ -64,6 +72,35 @@ public class DisplayProductActivity extends AppCompatActivity implements Merchan
         price = findViewById(R.id.productPrice);
         productDescription = findViewById(R.id.product_description);
         attibutes = findViewById(R.id.productAttributes);
+        increment = findViewById(R.id.increase);
+        decrement = findViewById(R.id.decrease);
+        textCount = findViewById(R.id.textCount);
+        final AppDatabase database = Room.databaseBuilder(this, AppDatabase.class, "CartProduct")
+                .allowMainThreadQueries()
+                .build();
+
+        increment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int count = Integer.parseInt(String.valueOf(textCount.getText())) + 1;
+                textCount.setText(String.valueOf(count));
+//                cartList.get(index).setQuantity(cartList.get(index).getQuantity() + 1);
+//                holder.textCount.setText(String.valueOf(cartList.get(index).getQuantity()));
+
+            }
+        });
+
+        decrement.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int count = Integer.parseInt(String.valueOf(textCount.getText()));
+
+                if (count > 1)
+                    count --;
+                textCount.setText(String.valueOf(count));
+
+            }
+        });
 
 //        Call<Products> productDetails = service.getProductDetails(productId);
 //        productDetails.enqueue(new Callback<Products>() {
@@ -95,13 +132,14 @@ public class DisplayProductActivity extends AppCompatActivity implements Merchan
         productCall.enqueue(new Callback<ResponseDto<ProductDetailResponse>>() {
             @Override
             public void onResponse(Call<ResponseDto<ProductDetailResponse>> call, Response<ResponseDto<ProductDetailResponse>> response) {
-                generateMerchantList(response.body().getData().getMerchantList());
+                 generateMerchantList(response.body().getData().getMerchantList());
                 Glide.with(DisplayProductActivity.this).load(response.body().getData().getProduct().getImageUrl())
                             .into(image);
-                    productName.setText(response.body().getData().getProduct().getProductName());
+                productNameSave = response.body().getData().getProduct().getProductName();
+                    productName.setText(productNameSave);
                     ratingBar.setRating(response.body().getData().getProduct().getProductRating());
                     price.setText("Price: " + String.valueOf(response.body().getData().getProduct().getProductPrice()));
-
+                    imageUrl = response.body().getData().getProduct().getImageUrl();
                     productDescription.setText(response.body().getData().getProduct().getDescription());
                     Map<String, String> getAttributes = response.body().getData().getProduct().getProductAttributes();
                     StringBuilder tempAttributeStorage = new StringBuilder();
@@ -121,6 +159,25 @@ public class DisplayProductActivity extends AppCompatActivity implements Merchan
            @Override
            public void onClick(View v) {
                Intent intent=new Intent(DisplayProductActivity.this, CartActivity.class);
+
+               cartProductDAO = database.getCartProductDAO();
+               CartProduct cartProduct = new CartProduct();
+               cartProduct.setProductId(productId);
+               cartProduct.setMerchantId(merchantId);
+               cartProduct.setPrice(merchantProductPrice);
+               cartProduct.setQuantityBrought(Integer.parseInt(textCount.getText().toString()));
+               cartProduct.setImageUrl(imageUrl);
+               cartProduct.setProductName(productNameSave);
+
+               CartProduct product = cartProductDAO.getItemById(productId, merchantId);
+               if(product != null)
+               {
+                   product.setQuantityBrought(product.getQuantityBrought() + Integer.parseInt(textCount.getText().toString()));
+                    cartProductDAO.update(product);
+               }
+               else
+               cartProductDAO.insert(cartProduct);
+
                startActivity(intent);
            }
        });
@@ -169,6 +226,7 @@ public class DisplayProductActivity extends AppCompatActivity implements Merchan
 
     @Override
     public void onClick(Merchant merchant) {
-
+        merchantId = merchant.getMerchantId();
+        merchantProductPrice = merchant.getProductsPrice();
     }
 }

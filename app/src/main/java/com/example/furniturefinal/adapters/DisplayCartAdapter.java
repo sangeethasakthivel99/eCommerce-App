@@ -12,21 +12,26 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.furniturefinal.activities.CartActivity;
-import com.example.furniturefinal.pojoclass.CartModel;
+import com.bumptech.glide.Glide;
 import com.example.furniturefinal.R;
+import com.example.furniturefinal.activities.CartActivity;
+import com.example.furniturefinal.database.AppDatabase;
+import com.example.furniturefinal.database.CartProduct;
+import com.example.furniturefinal.database.CartProductDAO;
 
 import java.util.List;
 
 public class DisplayCartAdapter extends RecyclerView.Adapter<DisplayCartAdapter.ViewHolder> {
     Context context;
-    List<CartModel> cartList;
+    List<CartProduct> cartList;
     private TextView textCount;
+    private CartProductDAO cartProductDAO;
+    AppDatabase database;
 
-
-    public DisplayCartAdapter(Context context, List<CartModel> cartList) {
+    public DisplayCartAdapter(Context context, List<CartProduct> cartList, AppDatabase database) {
         this.context = context;
         this.cartList = cartList;
+        this.database = database;
     }
 
     @NonNull
@@ -38,11 +43,11 @@ public class DisplayCartAdapter extends RecyclerView.Adapter<DisplayCartAdapter.
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
-//        holder.img.setImageResource(cartList.get(position).getImage());
+    public void onBindViewHolder(@NonNull final ViewHolder holder,final int position) {
+
         final int index = position;
         holder.productName.setText(cartList.get(position).getProductName());
-        holder.productPrice.setText(cartList.get(position).getProductPrice());
+        holder.productPrice.setText(String.valueOf(cartList.get(position).getPrice()));
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -51,32 +56,45 @@ public class DisplayCartAdapter extends RecyclerView.Adapter<DisplayCartAdapter.
             }
         });
 
-        if (cartList.get(position).getQuantity() == 1) {
-            holder.textCount.setText(String.valueOf(cartList.get(position).getQuantity()));
+        if (cartList.get(position).getQuantityBrought() >= 1) {
+            holder.textCount.setText(String.valueOf(cartList.get(position).getQuantityBrought()));
         }
         holder.increment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //int count= Integer.parseInt(String.valueOf(holder.txtQuantity.getText()));
 //                count++;
-                cartList.get(index).setQuantity(cartList.get(index).getQuantity() + 1);
-                holder.textCount.setText(String.valueOf(cartList.get(index).getQuantity()));
+                cartList.get(index).setQuantityBrought(cartList.get(index).getQuantityBrought() + 1);
+                holder.textCount.setText(String.valueOf(cartList.get(index).getQuantityBrought()));
 
             }
         });
 
+//        cartProductDAO = database.getCartProductDAO();
         holder.decrease.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int count = Integer.parseInt(String.valueOf(holder.textCount.getText()));
+                cartProductDAO = database.getCartProductDAO();
+                if (cartList.get(index).getQuantityBrought() > 1) {
+                    cartList.get(index).setQuantityBrought(cartList.get(index).getQuantityBrought() - 1);
+                    holder.textCount.setText(String.valueOf(cartList.get(index).getQuantityBrought()));
+                }
+                else if(cartList.get(index).getQuantityBrought() == 1)
+                {
+                    CartProduct cartProduct = cartProductDAO.getItemById(cartList.get(index).getProductId(), cartList.get(index).getMerchantId());
+                    cartProductDAO.delete(cartProduct);
+                    cartList.remove(position);
+                    notifyItemRemoved(position);
+                    notifyItemRangeChanged(position, getItemCount());
+                }
 
-                if (cartList.get(index).getQuantity() > 1)
-                    cartList.get(index).setQuantity(cartList.get(index).getQuantity() - 1);
-                holder.textCount.setText(String.valueOf(cartList.get(index).getQuantity()));
 
             }
         });
 
+        Glide.with(holder.img.getContext()).load(cartList.get(position).getImageUrl())
+                .into(holder.img);
 
     }
 
@@ -95,7 +113,7 @@ public class DisplayCartAdapter extends RecyclerView.Adapter<DisplayCartAdapter.
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            img = itemView.findViewById(R.id.imageUrl);
+            img = itemView.findViewById(R.id.smallImageUrl);
             productName = itemView.findViewById(R.id.productName);
             productPrice = itemView.findViewById(R.id.productPrice);
             increment = itemView.findViewById(R.id.increase);
