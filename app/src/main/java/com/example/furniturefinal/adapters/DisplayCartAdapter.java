@@ -18,6 +18,7 @@ import com.example.furniturefinal.activities.CartActivity;
 import com.example.furniturefinal.database.AppDatabase;
 import com.example.furniturefinal.database.CartProduct;
 import com.example.furniturefinal.database.CartProductDAO;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;
 
@@ -83,28 +84,28 @@ public class DisplayCartAdapter extends RecyclerView.Adapter<DisplayCartAdapter.
             public void onClick(View v) {
                 int count = Integer.parseInt(String.valueOf(holder.textCount.getText()));
                 cartProductDAO = database.getCartProductDAO();
-                if (cartList.get(index).getQuantityBrought() > 1) {
-                    cartList.get(index).setQuantityBrought(cartList.get(index).getQuantityBrought() - 1);
-                    holder.textCount.setText(String.valueOf(cartList.get(index).getQuantityBrought()));
+                if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+                    if (cartList.get(index).getQuantityBrought() > 1) {
+                        cartList.get(index).setQuantityBrought(cartList.get(index).getQuantityBrought() - 1);
+                        holder.textCount.setText(String.valueOf(cartList.get(index).getQuantityBrought()));
 
-                    CartProduct product = cartProductDAO.getItemById(cartList.get(index).getProductId(), cartList.get(index).getMerchantId());
-                    product.setPrice((product.getPrice()/product.getQuantityBrought()) * (product.getQuantityBrought() - 1));
-                    product.setQuantityBrought(product.getQuantityBrought() - 1);
-                    cartProductDAO.update(product);
-                    cartList.set(position, product);
-                    cartList.get(position).setQuantityBrought(product.getQuantityBrought());
-                    notifyItemChanged(position);
+                        CartProduct product = cartProductDAO.getItemById(cartList.get(index).getProductId(), cartList.get(index).getMerchantId());
+                        product.setPrice((product.getPrice() / product.getQuantityBrought()) * (product.getQuantityBrought() - 1));
+                        product.setQuantityBrought(product.getQuantityBrought() - 1);
+                        cartProductDAO.update(product);
+                        cartList.set(position, product);
+                        cartList.get(position).setQuantityBrought(product.getQuantityBrought());
+                        notifyItemChanged(position);
+                    } else if (cartList.get(index).getQuantityBrought() == 1) {
+                        CartProduct cartProduct = cartProductDAO.getItemById(cartList.get(index).getProductId(), cartList.get(index).getMerchantId());
+                        cartProductDAO.delete(cartProduct);
+                        cartList.remove(position);
+                        notifyItemRemoved(position);
+                        notifyItemRangeChanged(position, getItemCount());
+                    }
+                } else{
+
                 }
-                else if(cartList.get(index).getQuantityBrought() == 1)
-                {
-                    CartProduct cartProduct = cartProductDAO.getItemById(cartList.get(index).getProductId(), cartList.get(index).getMerchantId());
-                    cartProductDAO.delete(cartProduct);
-                    cartList.remove(position);
-                    notifyItemRemoved(position);
-                    notifyItemRangeChanged(position, getItemCount());
-                }
-
-
             }
         });
 

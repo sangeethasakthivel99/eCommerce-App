@@ -27,6 +27,8 @@ import com.example.furniturefinal.pojoclass.ProductDetailResponse;
 import com.example.furniturefinal.pojoclass.ResponseDto;
 import com.example.furniturefinal.retrofit.Endpoint;
 import com.example.furniturefinal.retrofit.RetrofitClass;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.List;
 import java.util.Map;
@@ -57,13 +59,18 @@ public class DisplayProductActivity extends AppCompatActivity implements Merchan
     private String imageUrl;
     private CartProductDAO cartProductDAO;
     private String productNameSave;
+    private FirebaseAuth auth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_display);
-        Endpoint service = RetrofitClass.getRetrofit().create(Endpoint.class);
+        final Endpoint service = RetrofitClass.getRetrofit().create(Endpoint.class);
         Intent intent = getIntent();
         final String productId = intent.getStringExtra("productId");
+
+        auth = FirebaseAuth.getInstance();
+        final FirebaseUser firebaseUser = auth.getCurrentUser();
 
         image = findViewById(R.id.imageUrl);
         ratingBar = findViewById(R.id.rating);
@@ -84,8 +91,8 @@ public class DisplayProductActivity extends AppCompatActivity implements Merchan
             public void onClick(View v) {
                 int count = Integer.parseInt(String.valueOf(textCount.getText())) + 1;
                 textCount.setText(String.valueOf(count));
-//                cartList.get(index).setQuantity(cartList.get(index).getQuantity() + 1);
-//                holder.textCount.setText(String.valueOf(cartList.get(index).getQuantity()));
+//                cartList.get(index).setQuantityBrought(cartList.get(index).getQuantityBrought() + 1);
+//                holder.textCount.setText(String.valueOf(cartList.get(index).getQuantityBrought()));
 
             }
         });
@@ -129,28 +136,47 @@ public class DisplayProductActivity extends AppCompatActivity implements Merchan
 //        });
 
         Call<ResponseDto<ProductDetailResponse>> productCall = service.getProductDetailsGeneric(productId);
+
         productCall.enqueue(new Callback<ResponseDto<ProductDetailResponse>>() {
             @Override
             public void onResponse(Call<ResponseDto<ProductDetailResponse>> call, Response<ResponseDto<ProductDetailResponse>> response) {
-                 generateMerchantList(response.body().getData().getMerchantList());
-                Glide.with(DisplayProductActivity.this).load(response.body().getData().getProduct().getImageUrl())
-                            .into(image);
-                productNameSave = response.body().getData().getProduct().getProductName();
-                    productName.setText(productNameSave);
-                    ratingBar.setRating(response.body().getData().getProduct().getProductRating());
-                    price.setText("Price: " + String.valueOf(response.body().getData().getProduct().getProductPrice()));
-                    imageUrl = response.body().getData().getProduct().getImageUrl();
-                    productDescription.setText(response.body().getData().getProduct().getDescription());
-                    Map<String, String> getAttributes = response.body().getData().getProduct().getProductAttributes();
-                    StringBuilder tempAttributeStorage = new StringBuilder();
-                    for (Map.Entry<String,String> entry : getAttributes.entrySet())
-                        tempAttributeStorage.append(entry.getKey() + ": " + entry.getValue() + "\n");
-                    attibutes.setText(tempAttributeStorage.toString());
+
+               boolean successMessage = response.body().getSuccess();
+               if(!successMessage)
+               {
+                   Call<ResponseDto<ProductDetailResponse>> alternateProductCall = service.getProductDetailsBackup(productId);
+                   alternateProductCall.enqueue(new Callback<ResponseDto<ProductDetailResponse>>() {
+                       @Override
+                       public void onResponse(Call<ResponseDto<ProductDetailResponse>> call, Response<ResponseDto<ProductDetailResponse>> response) {
+                           binding(response);
+                       }
+
+                       @Override
+                       public void onFailure(Call<ResponseDto<ProductDetailResponse>> call, Throwable t) {
+
+                       }
+                   });
+               }
+               else {
+                   binding(response);
+               }
             }
 
             @Override
             public void onFailure(Call<ResponseDto<ProductDetailResponse>> call, Throwable t) {
-                Toast.makeText(DisplayProductActivity.this, "Failed3", Toast.LENGTH_LONG).show();
+                Toast.makeText(DisplayProductActivity.this, "Redirecting..", Toast.LENGTH_LONG).show();
+                Call<ResponseDto<ProductDetailResponse>> alternateProductCall = service.getProductDetailsBackup(productId);
+                alternateProductCall.enqueue(new Callback<ResponseDto<ProductDetailResponse>>() {
+                    @Override
+                    public void onResponse(Call<ResponseDto<ProductDetailResponse>> call, Response<ResponseDto<ProductDetailResponse>> response) {
+                        binding(response);
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseDto<ProductDetailResponse>> call, Throwable t) {
+
+                    }
+                });
             }
         });
 
@@ -231,5 +257,21 @@ public class DisplayProductActivity extends AppCompatActivity implements Merchan
     public void onClick(Merchant merchant) {
         merchantId = merchant.getMerchantId();
         merchantProductPrice = merchant.getProductsPrice();
+    }
+    public void binding(Response<ResponseDto<ProductDetailResponse>> response){
+        generateMerchantList(response.body().getData().getMerchantList());
+        Glide.with(DisplayProductActivity.this).load(response.body().getData().getProduct().getImageUrl())
+                .into(image);
+        productNameSave = response.body().getData().getProduct().getProductName();
+        productName.setText(productNameSave);
+        ratingBar.setRating(response.body().getData().getProduct().getProductRating());
+        price.setText("Price: " + String.valueOf(response.body().getData().getProduct().getProductPrice()));
+        imageUrl = response.body().getData().getProduct().getImageUrl();
+        productDescription.setText(response.body().getData().getProduct().getDescription());
+        Map<String, String> getAttributes = response.body().getData().getProduct().getProductAttributes();
+        StringBuilder tempAttributeStorage = new StringBuilder();
+        for (Map.Entry<String,String> entry : getAttributes.entrySet())
+            tempAttributeStorage.append(entry.getKey() + ": " + entry.getValue() + "\n");
+        attibutes.setText(tempAttributeStorage.toString());
     }
 }

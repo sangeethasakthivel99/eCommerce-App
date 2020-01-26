@@ -4,15 +4,23 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import com.google.gson.annotations.SerializedName;
+
 @Entity(tableName = "CartProduct")
 public class CartProduct {
     @PrimaryKey(autoGenerate = true)
     long id;
+    @SerializedName("productId")
     private String productId;
+    @SerializedName("merchantId")
     private String merchantId;
+    @SerializedName("quantityBrought")
     private int quantityBrought;
+    @SerializedName("imageUrl")
     private String imageUrl;
+    @SerializedName("price")
     private double price;
+    @SerializedName("productName")
     private String productName;
 
     public String getProductName() {
