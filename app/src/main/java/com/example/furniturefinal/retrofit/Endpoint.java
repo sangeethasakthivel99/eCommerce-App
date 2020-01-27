@@ -5,6 +5,9 @@ import com.example.furniturefinal.pojoclass.Categories;
 import com.example.furniturefinal.pojoclass.CategoryProducts;
 import com.example.furniturefinal.pojoclass.CustomerDto;
 import com.example.furniturefinal.pojoclass.DummyCartDto;
+import com.example.furniturefinal.pojoclass.HistoryElements;
+import com.example.furniturefinal.pojoclass.Order;
+import com.example.furniturefinal.pojoclass.OrderDto;
 import com.example.furniturefinal.pojoclass.PopularProducts;
 import com.example.furniturefinal.pojoclass.ProductDetailResponse;
 import com.example.furniturefinal.pojoclass.ResponseDto;
@@ -34,9 +37,6 @@ public interface Endpoint {
     @GET("/search/get/{productId}")
     Call<ResponseDto<ProductDetailResponse>> getProductDetailsBackup(@Path("productId")String productId);
 
-//    @GET("/spring-cloud-eureka-client-getOrder/{customerId}")
-//    Call<List<CartModel>> getOrder(@Path("customerId")String customerId);
-
     @GET("/search/searchQuery/{query}")
     Call<List<CategoryProducts>> getSearchedProducts(@Path("query")String query);
 
@@ -48,4 +48,10 @@ public interface Endpoint {
 
     @GET("/cartandorder/cart")
     Call<ResponseDto<List<CartProduct>>> getCartFromBackend();
+
+    @POST("/cartandorder/order")
+    Call<ResponseDto<Order>> checkout(@Body OrderDto orderDto);
+
+    @GET("/cartandorder/order")
+    Call<List<HistoryElements>> getOrderHistory();
 }

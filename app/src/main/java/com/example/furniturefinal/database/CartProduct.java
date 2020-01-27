@@ -18,8 +18,8 @@ public class CartProduct {
     private int quantityBrought;
     @SerializedName("imageUrl")
     private String imageUrl;
-    @SerializedName("price")
-    private double price;
+    @SerializedName("productPrice")
+    private double productPrice;
     @SerializedName("productName")
     private String productName;
 
@@ -64,11 +64,11 @@ public class CartProduct {
         this.imageUrl = imageUrl;
     }
 
-    public double getPrice() {
-        return price;
+    public double getProductPrice() {
+        return productPrice;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setProductPrice(double productPrice) {
+        this.productPrice = productPrice;
     }
 }

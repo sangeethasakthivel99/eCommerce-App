@@ -174,7 +174,12 @@ public class LoginActivity extends AppCompatActivity {
     }
     private void updateUI() {
         Toast.makeText(LoginActivity.this, "Logged in Successfully", Toast.LENGTH_LONG).show();
-        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+        Intent intentDetails = getIntent();
+        Intent intent;
+        if(intentDetails.getStringExtra("activityid") != "CartActivity")
+            intent = new Intent(LoginActivity.this, HomeActivity.class);
+        else
+            intent = new Intent(LoginActivity.this, CartActivity.class);
         startActivity(intent);
         finish();
     }

@@ -15,7 +15,6 @@ import androidx.room.Room;
 
 import com.example.furniturefinal.R;
 import com.example.furniturefinal.adapters.DisplayCartAdapter;
-import com.example.furniturefinal.adapters.DisplayCartAdapterBackend;
 import com.example.furniturefinal.database.AppDatabase;
 import com.example.furniturefinal.database.CartProduct;
 import com.example.furniturefinal.database.CartProductDAO;
@@ -38,7 +37,6 @@ import retrofit2.Response;
 public class CartActivity extends AppCompatActivity  {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
-    private Bundle savedInstanceState;
 
     private List<CartModel> list;
     private FirebaseAuth auth;
@@ -49,19 +47,20 @@ public class CartActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
         final Endpoint service = RetrofitClass.getRetrofit().create(Endpoint.class);
-//        Endpoint service = RetrofitClass.getRetrofit().create(Endpoint.class);
+
         auth = FirebaseAuth.getInstance();
         final FirebaseUser firebaseUser = auth.getCurrentUser();
 
         final AppDatabase database = Room.databaseBuilder(this, AppDatabase.class, "CartProduct")
                 .allowMainThreadQueries()
                 .build();
-        CartProductDAO cartProductDAO = database.getCartProductDAO();
+
+        final CartProductDAO cartProductDAO = database.getCartProductDAO();
+
         List<CartProduct> cartProducts = cartProductDAO.getCartProducts();
         if(firebaseUser != null){
-
             //API call to add to cart
-            List<DummyCartListDto> list = new ArrayList<>();
+            List<DummyCartListDto> productsToBackend = new ArrayList<>();
             DummyCartDto dummyCartDto = new DummyCartDto();
             for( CartProduct cartProduct: cartProducts) {
                 DummyCartListDto dummyCartListDto = new DummyCartListDto();
@@ -71,11 +70,11 @@ public class CartActivity extends AppCompatActivity  {
 
                 cartProductDAO.delete(cartProduct);
 
-                list.add(dummyCartListDto);
+                productsToBackend.add(dummyCartListDto);
             }
             cartProducts.clear();
-//            adapter.notifyDataSetChanged();
-            dummyCartDto.setCartDtoList(list);
+
+            dummyCartDto.setCartDtoList(productsToBackend);
             Call<ResponseDto<String>> responseDtoCall = service.addToCartBackend(dummyCartDto);
             responseDtoCall.enqueue(new Callback<ResponseDto<String>>() {
                 @Override
@@ -90,7 +89,7 @@ public class CartActivity extends AppCompatActivity  {
             });
 
         }
-        recyclerView = (RecyclerView) findViewById(R.id.cart_recycler_view);
+        recyclerView = findViewById(R.id.cart_recycler_view);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -100,20 +99,16 @@ public class CartActivity extends AppCompatActivity  {
         }
         else
         {
-//            {
-//                FirebaseAuth.getInstance().getCurrentUser().getIdToken(true).addOnSuccessListener(new OnSuccessListener<GetTokenResult>() {
-//                    @Override
-//                    public void onSuccess(GetTokenResult getTokenResult) {
-//                        String token = getTokenResult.getToken();
-//                        System.out.println(token);
-//                    }
-//                });
-//            }
             Call<ResponseDto<List<CartProduct>>> responseDtoCall = service.getCartFromBackend();
             responseDtoCall.enqueue(new Callback<ResponseDto<List<CartProduct>>>() {
                 @Override
                 public void onResponse(Call<ResponseDto<List<CartProduct>>> call, Response<ResponseDto<List<CartProduct>>> response) {
-                    adapter = new DisplayCartAdapterBackend(CartActivity.this, response.body().getData());
+
+                    for(CartProduct cartProduct: response.body().getData()){
+                        cartProductDAO.insert(cartProduct);
+                    }
+//                    adapter = new DisplayCartAdapterBackend(CartActivity.this, response.body().getData());
+                    adapter = new DisplayCartAdapter(CartActivity.this, cartProductDAO.getCartProducts(), database);
                     recyclerView.setAdapter(adapter);
                 }
 
@@ -123,37 +118,21 @@ public class CartActivity extends AppCompatActivity  {
                 }
             });
         }
-
-
+        recyclerView.setAdapter(adapter);
         Button checkout = findViewById(R.id.checkout);
         checkout.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (firebaseUser == null) {
                     Intent intent = new Intent(CartActivity.this, LoginActivity.class);
+                    intent.putExtra("activityid", "CartActivity");
                     startActivity(intent);
                 } else {
                     Intent intent = new Intent(CartActivity.this, ShipActivity.class);
                     startActivity(intent);
                 }
-                //  displayAlert();
                 return false;
             }
-
-            /*public void displayAlert() {
-                new AlertDialog.Builder(CartActivity.this).setMessage("Check Your Mail")
-                        .setTitle("Email Invoice")
-                        .setCancelable(true)
-                        .setNeutralButton(android.R.string.ok,
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int whichButton) {
-                                        finish();
-                                    }
-                                })
-                        .show();
-            }*/
         });
     }
-
-
 }

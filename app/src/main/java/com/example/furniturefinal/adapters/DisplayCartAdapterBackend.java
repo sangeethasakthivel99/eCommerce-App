@@ -22,9 +22,6 @@ public class DisplayCartAdapterBackend extends RecyclerView.Adapter<DisplayCartA
     List<CartProduct> cartList;
     private TextView textCount;
 
-
-
-
     public DisplayCartAdapterBackend(Context context, List<CartProduct> data) {
         this.context = context;
         this.cartList = data;
@@ -43,7 +40,7 @@ public class DisplayCartAdapterBackend extends RecyclerView.Adapter<DisplayCartA
 
         final int index = position;
         holder.productName.setText(cartList.get(position).getProductName());
-        holder.productPrice.setText(String.valueOf(cartList.get(position).getPrice()));
+        holder.productPrice.setText(String.valueOf(cartList.get(position).getProductPrice()));
 
 //        holder.itemView.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -63,7 +60,7 @@ public class DisplayCartAdapterBackend extends RecyclerView.Adapter<DisplayCartA
                 holder.textCount.setText(String.valueOf(cartList.get(index).getQuantityBrought()));
 //                cartProductDAO = database.getCartProductDAO();
 //                CartProduct product = cartProductDAO.getItemById(cartList.get(index).getProductId(), cartList.get(index).getMerchantId());
-//                product.setPrice((product.getPrice()/product.getQuantityBrought()) * (product.getQuantityBrought() + 1));
+//                product.setProductPrice((product.getProductPrice()/product.getQuantityBrought()) * (product.getQuantityBrought() + 1));
 //                product.setQuantityBrought(product.getQuantityBrought() + 1);
 //                cartProductDAO.update(product);
 //                cartList.set(position, product);
@@ -83,7 +80,7 @@ public class DisplayCartAdapterBackend extends RecyclerView.Adapter<DisplayCartA
                     holder.textCount.setText(String.valueOf(cartList.get(index).getQuantityBrought()));
 //
 //                    CartProduct product = cartProductDAO.getItemById(cartList.get(index).getProductId(), cartList.get(index).getMerchantId());
-//                    product.setPrice((product.getPrice()/product.getQuantityBrought()) * (product.getQuantityBrought() - 1));
+//                    product.setProductPrice((product.getProductPrice()/product.getQuantityBrought()) * (product.getQuantityBrought() - 1));
 //                    product.setQuantityBrought(product.getQuantityBrought() - 1);
 //                    cartProductDAO.update(product);
 //                    cartList.set(position, product);

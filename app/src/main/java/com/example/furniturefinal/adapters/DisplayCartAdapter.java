@@ -1,7 +1,6 @@
 package com.example.furniturefinal.adapters;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,11 +13,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.furniturefinal.R;
-import com.example.furniturefinal.activities.CartActivity;
 import com.example.furniturefinal.database.AppDatabase;
 import com.example.furniturefinal.database.CartProduct;
 import com.example.furniturefinal.database.CartProductDAO;
-import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;
 
@@ -48,14 +45,14 @@ public class DisplayCartAdapter extends RecyclerView.Adapter<DisplayCartAdapter.
 
         final int index = position;
         holder.productName.setText(cartList.get(position).getProductName());
-        holder.productPrice.setText(String.valueOf(cartList.get(position).getPrice()));
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), CartActivity.class);
-                context.startActivity(intent);
-            }
-        });
+        holder.productPrice.setText(String.valueOf(cartList.get(position).getProductPrice()));
+//        holder.itemView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(view.getContext(), CartActivity.class);
+//                context.startActivity(intent);
+//            }
+//        });
 
         if (cartList.get(position).getQuantityBrought() >= 1) {
             holder.textCount.setText(String.valueOf(cartList.get(position).getQuantityBrought()));
@@ -63,13 +60,12 @@ public class DisplayCartAdapter extends RecyclerView.Adapter<DisplayCartAdapter.
         holder.increment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //int count= Integer.parseInt(String.valueOf(holder.txtQuantity.getText()));
-//                count++;
+
                 cartList.get(index).setQuantityBrought(cartList.get(index).getQuantityBrought() + 1);
                 holder.textCount.setText(String.valueOf(cartList.get(index).getQuantityBrought()));
                 cartProductDAO = database.getCartProductDAO();
                 CartProduct product = cartProductDAO.getItemById(cartList.get(index).getProductId(), cartList.get(index).getMerchantId());
-                product.setPrice((product.getPrice()/product.getQuantityBrought()) * (product.getQuantityBrought() + 1));
+                product.setProductPrice((product.getProductPrice()/product.getQuantityBrought()) * (product.getQuantityBrought() + 1));
                 product.setQuantityBrought(product.getQuantityBrought() + 1);
                 cartProductDAO.update(product);
                 cartList.set(position, product);
@@ -78,19 +74,18 @@ public class DisplayCartAdapter extends RecyclerView.Adapter<DisplayCartAdapter.
             }
         });
 
-//        cartProductDAO = database.getCartProductDAO();
         holder.decrease.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int count = Integer.parseInt(String.valueOf(holder.textCount.getText()));
                 cartProductDAO = database.getCartProductDAO();
-                if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+
                     if (cartList.get(index).getQuantityBrought() > 1) {
                         cartList.get(index).setQuantityBrought(cartList.get(index).getQuantityBrought() - 1);
                         holder.textCount.setText(String.valueOf(cartList.get(index).getQuantityBrought()));
 
                         CartProduct product = cartProductDAO.getItemById(cartList.get(index).getProductId(), cartList.get(index).getMerchantId());
-                        product.setPrice((product.getPrice() / product.getQuantityBrought()) * (product.getQuantityBrought() - 1));
+                        product.setProductPrice((product.getProductPrice() / product.getQuantityBrought()) * (product.getQuantityBrought() - 1));
                         product.setQuantityBrought(product.getQuantityBrought() - 1);
                         cartProductDAO.update(product);
                         cartList.set(position, product);
@@ -103,9 +98,7 @@ public class DisplayCartAdapter extends RecyclerView.Adapter<DisplayCartAdapter.
                         notifyItemRemoved(position);
                         notifyItemRangeChanged(position, getItemCount());
                     }
-                } else{
 
-                }
             }
         });
 

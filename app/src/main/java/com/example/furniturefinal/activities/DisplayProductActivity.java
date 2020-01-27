@@ -109,32 +109,6 @@ public class DisplayProductActivity extends AppCompatActivity implements Merchan
             }
         });
 
-//        Call<Products> productDetails = service.getProductDetails(productId);
-//        productDetails.enqueue(new Callback<Products>() {
-//            @Override
-//            public void onResponse(Call<Products> call, Response<Products> response) {
-//                generateMerchantList(response.body().getMerchantList());
-//                if(response != null){
-//                    Glide.with(DisplayProductActivity.this).load(response.body().getImageUrl())
-//                            .into(image);
-//                    productName.setText(response.body().getProductName());
-//                    ratingBar.setNumStars(response.body().getProductRating());
-//                    price.setText(String.valueOf(response.body().getProductPrice()));
-//
-//                    productDescription.setText(response.body().getDescription());
-//                    Map<String, String> getAttributes = response.body().getProductAttributes();
-//                    StringBuilder tempAttributeStorage = new StringBuilder();
-//                    for (Map.Entry<String,String> entry : getAttributes.entrySet())
-//                        tempAttributeStorage.append(entry.getKey() + ": " + entry.getValue() + "\n");
-//                    attibutes.setText(tempAttributeStorage.toString());
-//                }
-//            }
-//            @Override
-//            public void onFailure(Call<Products> call, Throwable t) {
-//                Toast.makeText(DisplayProductActivity.this, "Something went wrong with products...Please try later!", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-
         Call<ResponseDto<ProductDetailResponse>> productCall = service.getProductDetailsGeneric(productId);
 
         productCall.enqueue(new Callback<ResponseDto<ProductDetailResponse>>() {
@@ -190,7 +164,7 @@ public class DisplayProductActivity extends AppCompatActivity implements Merchan
                CartProduct cartProduct = new CartProduct();
                cartProduct.setProductId(productId);
                cartProduct.setMerchantId(merchantId);
-               cartProduct.setPrice(merchantProductPrice * Integer.parseInt(textCount.getText().toString()));
+               cartProduct.setProductPrice(merchantProductPrice * Integer.parseInt(textCount.getText().toString()));
                cartProduct.setQuantityBrought(Integer.parseInt(textCount.getText().toString()));
                cartProduct.setImageUrl(imageUrl);
                cartProduct.setProductName(productNameSave);
@@ -200,6 +174,7 @@ public class DisplayProductActivity extends AppCompatActivity implements Merchan
                {
                    product.setQuantityBrought(product.getQuantityBrought() + Integer.parseInt(textCount.getText().toString()));
                     cartProductDAO.update(product);
+                   startActivity(intent);
                }
                else if(merchantId != null) {
                    cartProductDAO.insert(cartProduct);
@@ -210,40 +185,6 @@ public class DisplayProductActivity extends AppCompatActivity implements Merchan
                     Toast.makeText(DisplayProductActivity.this, "Please select merchant!!", Toast.LENGTH_SHORT).show();
            }
        });
-
-//        Glide.with(DisplayProductActivity.this).load("https://ii1.pepperfry.com/media/catalog/product/m/i/494x544/Minimalistic-Sheesham-Wood-Coffee-Table-16013-1341407138QXRrdA.jpg")
-//                .into(image);
-//       ratingBar.setRating(3.5f);
-//       productName.setText("Table");
-//       price.setText("Price : 49999");
-//       productDescription.setText("This is descriptions");
-//        Map<String, String> hm = new HashMap<>();
-//        hm.put("Attribute 1", "Good");
-//        hm.put("Attribute 2", "Great");
-//        hm.put("Attribute 3", "Awesome");
-//
-//        StringBuilder tempAttributeStorage1 = new StringBuilder();
-//        for (Map.Entry<String,String> entry : hm.entrySet())
-//            tempAttributeStorage1.append(entry.getKey() + ": " + entry.getValue() + "\n");
-//        attibutes.setText(tempAttributeStorage1.toString());
-//
-//        List<Merchant> merchantCheckList = new ArrayList<>();
-//
-//
-//            Merchant m1 = new Merchant();
-//            m1.setMerchantId(1);
-//            m1.setMerchantName("AA");
-//            m1.setProductsPrice(100);
-//            Merchant m2 = new Merchant();
-//            m2.setMerchantName("BB");
-//            m2.setMerchantId(2);
-//            m2.setProductsPrice(200);
-//
-//
-//            merchantCheckList.add(m1);
-//            merchantCheckList.add(m2);
-
-       // generateMerchantList(merchantCheckList);
     }
     private void generateMerchantList(List<Merchant> merchantList) {
         recyclerView = findViewById(R.id.merchant_recycler_view);

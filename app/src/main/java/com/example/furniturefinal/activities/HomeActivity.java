@@ -11,10 +11,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
 
 import com.example.furniturefinal.R;
 import com.example.furniturefinal.adapters.CategoryAdapter;
 import com.example.furniturefinal.adapters.PopularProductsAdapter;
+import com.example.furniturefinal.database.AppDatabase;
+import com.example.furniturefinal.database.CartProduct;
+import com.example.furniturefinal.database.CartProductDAO;
 import com.example.furniturefinal.pojoclass.Categories;
 import com.example.furniturefinal.pojoclass.PopularProducts;
 import com.example.furniturefinal.pojoclass.ResponseDto;
@@ -54,20 +58,9 @@ public class HomeActivity extends AppCompatActivity implements PopularProductsAd
         order=findViewById(R.id.order_history);
         cart=findViewById(R.id.cart);
 
-//        Call<List<Categories>> categories = service.getCategories();
-//
-//        categories.enqueue(new Callback<List<Categories>>() {
-//            @Override
-//            public void onResponse(Call<List<Categories>> call, Response<List<Categories>> response) {
-//                generateCategoryList(response.body());
-//
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<Categories>> call, Throwable t) {
-//                Toast.makeText(HomeActivity.this, "Something went wrong with categories...Please try later!", Toast.LENGTH_SHORT).show();
-//            }
-//        });
+        final AppDatabase database = Room.databaseBuilder(this, AppDatabase.class, "CartProduct")
+                .allowMainThreadQueries()
+                .build();
         Call<ResponseDto<List<Categories>>> categoriesCall = service.getCategoriesGeneric();
         categoriesCall.enqueue(new Callback<ResponseDto<List<Categories>>>() {
             @Override
@@ -94,19 +87,6 @@ public class HomeActivity extends AppCompatActivity implements PopularProductsAd
             }
         });
 
-//        Call<ResponseDto<List<PopularProducts>>> popularProducts = service.getPopularProducts();
-//        popularProducts.enqueue(new Callback<List<PopularProducts>>() {
-//            @Override
-//            public void onResponse(Call<List<PopularProducts>> call, Response<List<PopularProducts>> response) {
-//                generatePopularProductsList(response.body());
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<PopularProducts>> call, Throwable t) {
-//                Toast.makeText(HomeActivity.this, "Something went wrong with popular products...Please try later!", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-
         auth = FirebaseAuth.getInstance();
         FirebaseUser firebaseUser = auth.getCurrentUser();
 
@@ -131,6 +111,10 @@ public class HomeActivity extends AppCompatActivity implements PopularProductsAd
                 @Override
                 public void onClick(View view) {
                     auth.signOut();
+                    CartProductDAO cartProductDAO = database.getCartProductDAO();
+                    for(CartProduct cartProduct : cartProductDAO.getCartProducts())
+                        cartProductDAO.delete(cartProduct);
+
                     Intent intent = new Intent(HomeActivity.this, HomeActivity.class);
                     startActivity(intent);
                 }
@@ -147,7 +131,7 @@ public class HomeActivity extends AppCompatActivity implements PopularProductsAd
         order.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(HomeActivity.this,OrderHistoryActivity.class);
+                Intent intent=new Intent(HomeActivity.this,OrderListActivity.class);
                 startActivity(intent);
 
             }
@@ -178,33 +162,6 @@ public class HomeActivity extends AppCompatActivity implements PopularProductsAd
                 return false;
             }
         });
-
-//
-//        List<PopularProducts> popularProductsCheckList = new ArrayList<>();
-//        for(int i=0;i<10;i++){
-//            PopularProducts pp = new PopularProducts();
-//            pp.setImageUrl("https://ii1.pepperfry.com/media/catalog/product/m/i/494x544/Minimalistic-Sheesham-Wood-Coffee-Table-16013-1341407138QXRrdA.jpg");
-//            pp.setProductId("1a");
-//            pp.setProductPrice(1000);
-//            pp.setMerchantId("1ab");
-//            pp.setName("abc");
-//            pp.setProductName("Shoes");
-//            pp.setProductRating(3);
-//
-//            popularProductsCheckList.add(pp);
-//        }
-//        generatePopularProductsList(popularProductsCheckList);
-
-//        List<Categories> categoriesChecklist = new ArrayList<>();
-//        for(int i = 0; i < 10; i++)
-//        {
-//            Categories c = new Categories();
-//            c.setCategoryId("1a");
-//            c.setCategoryName("Categories" + i);
-//
-//            categoriesChecklist.add(c);
-//        }
-       // generateCategoryList(categoriesChecklist);
     }
 
     private void generateCategoryList(List<Categories> categoriesList) {
