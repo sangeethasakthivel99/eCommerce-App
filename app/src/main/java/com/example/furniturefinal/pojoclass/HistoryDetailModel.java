@@ -1,14 +1,11 @@
 package com.example.furniturefinal.pojoclass;
 
-public class HistoryElement {
-    //private String orderId;
-    // private String merchantId;
-    // private String productId;
+public class HistoryDetailModel {
     private String productName;
     private String imageUrl;
     private int quantityBrought;
     private double productPrice;
-    public HistoryElement(String productName, String imageUrl, int quantityBrought, double productPrice) {
+    public HistoryDetailModel(String productName, String imageUrl, int quantityBrought, double productPrice) {
         this.productName = productName;
         this.imageUrl = imageUrl;
         this.quantityBrought = quantityBrought;

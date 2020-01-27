@@ -12,7 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.furniturefinal.R;
-import com.example.furniturefinal.activities.OrderListActivity;
 import com.example.furniturefinal.activities.ViewHistoryDetails;
 import com.example.furniturefinal.pojoclass.HistoryElements;
 
@@ -32,22 +31,17 @@ public class DisplayHistoryAdapter extends RecyclerView.Adapter<DisplayHistoryAd
         return viewHolder;
     }
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         final int index = position;
         holder.orderId.setText(orderHistoryList.get(position).getOrderId());
         holder.date.setText(String.valueOf(orderHistoryList.get(position).getDate()));
         holder.totalPrice.setText(String.valueOf(orderHistoryList.get(position).getTotalPrice()));
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), OrderListActivity.class);
-                context.startActivity(intent);
-            }
-        });
+
         holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(context, ViewHistoryDetails.class);
+                intent.putExtra("orderId", orderHistoryList.get(position).getOrderId());
                 context.startActivity(intent);
             }
         });

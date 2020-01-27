@@ -8,6 +8,7 @@ import com.example.furniturefinal.pojoclass.DummyCartDto;
 import com.example.furniturefinal.pojoclass.HistoryElements;
 import com.example.furniturefinal.pojoclass.Order;
 import com.example.furniturefinal.pojoclass.OrderDto;
+import com.example.furniturefinal.pojoclass.OrderPageDto;
 import com.example.furniturefinal.pojoclass.PopularProducts;
 import com.example.furniturefinal.pojoclass.ProductDetailResponse;
 import com.example.furniturefinal.pojoclass.ResponseDto;
@@ -53,5 +54,10 @@ public interface Endpoint {
     Call<ResponseDto<Order>> checkout(@Body OrderDto orderDto);
 
     @GET("/cartandorder/order")
-    Call<List<HistoryElements>> getOrderHistory();
+    Call<ResponseDto<List<HistoryElements>>> getOrderHistory();
+
+    @GET("/cartandorder/orderedItem/{orderId}")
+    Call<ResponseDto<List<OrderPageDto>>>
+
+    getOrderedItems(@Path("orderId")String orderId);
 }

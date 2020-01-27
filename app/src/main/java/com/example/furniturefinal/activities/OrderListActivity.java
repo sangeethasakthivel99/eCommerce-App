@@ -9,9 +9,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.furniturefinal.R;
 import com.example.furniturefinal.adapters.DisplayHistoryAdapter;
-import com.example.furniturefinal.pojoclass.HistoryElement;
 import com.example.furniturefinal.pojoclass.HistoryElements;
 import com.example.furniturefinal.pojoclass.HistoryModel;
+import com.example.furniturefinal.pojoclass.ResponseDto;
 import com.example.furniturefinal.retrofit.Endpoint;
 import com.example.furniturefinal.retrofit.RetrofitClass;
 
@@ -26,7 +26,6 @@ public class OrderListActivity extends AppCompatActivity {
     private RecyclerView.Adapter adapter;
     private Bundle savedInstanceState;
     private List<HistoryModel> list;
-    List<HistoryElement> historyElementList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,15 +34,16 @@ public class OrderListActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         Endpoint service = RetrofitClass.getRetrofit().create(Endpoint.class);
-        Call<List<HistoryElements>>  orderHistory = service.getOrderHistory();
-        orderHistory.enqueue(new Callback<List<HistoryElements>>() {
+        Call<ResponseDto<List<HistoryElements>>>  orderHistory = service.getOrderHistory();
+        orderHistory.enqueue(new Callback<ResponseDto<List<HistoryElements>>>() {
             @Override
-            public void onResponse(Call<List<HistoryElements>> call, Response<List<HistoryElements>> response) {
-                adapter = new DisplayHistoryAdapter(OrderListActivity.this, response.body());
+            public void onResponse(Call<ResponseDto<List<HistoryElements>>> call, Response<ResponseDto<List<HistoryElements>>> response) {
+                adapter = new DisplayHistoryAdapter(OrderListActivity.this, response.body().getData());
+                recyclerView.setAdapter(adapter);
             }
 
             @Override
-            public void onFailure(Call<List<HistoryElements>> call, Throwable t) {
+            public void onFailure(Call<ResponseDto<List<HistoryElements>>> call, Throwable t) {
                 Toast.makeText(OrderListActivity.this, "Can't load order history...Please try later!", Toast.LENGTH_SHORT).show();
             }
         });
@@ -57,6 +57,5 @@ public class OrderListActivity extends AppCompatActivity {
 //            list.add(historyModel);
             //adapter = new DisplayHistoryAdapter(this, list);
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
-            recyclerView.setAdapter(adapter);
         }
     }

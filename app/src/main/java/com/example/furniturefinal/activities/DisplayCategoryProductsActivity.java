@@ -60,7 +60,7 @@ public class DisplayCategoryProductsActivity extends AppCompatActivity implement
     @Override
     public void onClick(CategoryProducts products) {
         Intent intent=new Intent( DisplayCategoryProductsActivity.this, DisplayProductActivity.class);
-        intent.putExtra("product_id", products.getProductId());
+        intent.putExtra("productId", products.getProductId());
         startActivity(intent);
     }
 }
