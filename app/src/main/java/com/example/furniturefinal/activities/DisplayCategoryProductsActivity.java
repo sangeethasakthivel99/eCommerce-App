@@ -47,22 +47,6 @@ public class DisplayCategoryProductsActivity extends AppCompatActivity implement
             }
         });
 
-//        List<CategoryProducts> categoriesChecklist = new ArrayList<>();
-//        for(int i = 0; i < 10; i++)
-//        {
-//            CategoryProducts c = new CategoryProducts();
-//            c.setImageUrl("https://ii1.pepperfry.com/media/catalog/product/m/i/494x544/Minimalistic-Sheesham-Wood-Coffee-Table-16013-1341407138QXRrdA.jpg");
-//            c.setMerchantId("1ab");
-//            c.setName("ads");
-//            c.setProductPrice(1000);
-//            c.setProductRating(2);
-//            c.setProductName("Wood");
-//            c.setProductId("1a");
-//
-//            categoriesChecklist.add(c);
-//        }
-        //generateCategoryProductsList(categoriesChecklist);
-
     }
 
     private void generateCategoryProductsList(List<CategoryProducts> productsList) {
@@ -76,7 +60,7 @@ public class DisplayCategoryProductsActivity extends AppCompatActivity implement
     @Override
     public void onClick(CategoryProducts products) {
         Intent intent=new Intent( DisplayCategoryProductsActivity.this, DisplayProductActivity.class);
-        intent.putExtra("product_id", products.getProductId());
+        intent.putExtra("productId", products.getProductId());
         startActivity(intent);
     }
 }

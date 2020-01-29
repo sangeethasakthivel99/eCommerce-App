@@ -2,21 +2,21 @@ package com.example.furniturefinal.pojoclass;
 
 import com.google.gson.annotations.SerializedName;
 
-public class CartProducts {
+public class DummyCartListDto {
     @SerializedName("productName")
     String productName;
     @SerializedName("productId")
-    int productId;
+    String productId;
     @SerializedName("name")
     String name;
     @SerializedName("merchantId")
-    int merchantId;
+    String merchantId;
     @SerializedName("image")
     String image;
     @SerializedName("productPrice")
     int price;
-    @SerializedName("quantity")
-    int quantity;
+    @SerializedName("quantityBrought")
+    int quantityBrought;
 
     public String getProductName() {
         return productName;
@@ -26,11 +26,11 @@ public class CartProducts {
         this.productName = productName;
     }
 
-    public int getProductId() {
+    public String getProductId() {
         return productId;
     }
 
-    public void setProductId(int productId) {
+    public void setProductId(String productId) {
         this.productId = productId;
     }
 
@@ -42,11 +42,11 @@ public class CartProducts {
         this.name = name;
     }
 
-    public int getMerchantId() {
+    public String getMerchantId() {
         return merchantId;
     }
 
-    public void setMerchantId(int merchantId) {
+    public void setMerchantId(String merchantId) {
         this.merchantId = merchantId;
     }
 
@@ -66,24 +66,24 @@ public class CartProducts {
         this.price = price;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public int getQuantityBrought() {
+        return quantityBrought;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setQuantityBrought(int quantityBrought) {
+        this.quantityBrought = quantityBrought;
     }
 
     @Override
     public String toString() {
-        return "CartProducts{" +
+        return "DummyCartListDto{" +
                 "productName='" + productName + '\'' +
                 ", productId=" + productId +
                 ", name='" + name + '\'' +
                 ", merchantId=" + merchantId +
                 ", imageUrl='" + image + '\'' +
                 ", productPrice=" + price +
-                ", quantity=" + quantity +
+                ", quantityBrought=" + quantityBrought +
                 '}';
     }
 }

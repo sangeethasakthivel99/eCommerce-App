@@ -13,23 +13,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.furniturefinal.R;
-import com.example.furniturefinal.database.AppDatabase;
 import com.example.furniturefinal.database.CartProduct;
-import com.example.furniturefinal.database.CartProductDAO;
 
 import java.util.List;
 
-public class DisplayCartAdapter extends RecyclerView.Adapter<DisplayCartAdapter.ViewHolder> {
+public class DisplayCartAdapterBackend extends RecyclerView.Adapter<DisplayCartAdapterBackend.ViewHolder> {
     Context context;
     List<CartProduct> cartList;
     private TextView textCount;
-    private CartProductDAO cartProductDAO;
-    AppDatabase database;
 
-    public DisplayCartAdapter(Context context, List<CartProduct> cartList, AppDatabase database) {
+    public DisplayCartAdapterBackend(Context context, List<CartProduct> data) {
         this.context = context;
-        this.cartList = cartList;
-        this.database = database;
+        this.cartList = data;
     }
 
     @NonNull
@@ -46,6 +41,7 @@ public class DisplayCartAdapter extends RecyclerView.Adapter<DisplayCartAdapter.
         final int index = position;
         holder.productName.setText(cartList.get(position).getProductName());
         holder.productPrice.setText(String.valueOf(cartList.get(position).getProductPrice()));
+
 //        holder.itemView.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
@@ -60,45 +56,43 @@ public class DisplayCartAdapter extends RecyclerView.Adapter<DisplayCartAdapter.
         holder.increment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 cartList.get(index).setQuantityBrought(cartList.get(index).getQuantityBrought() + 1);
                 holder.textCount.setText(String.valueOf(cartList.get(index).getQuantityBrought()));
-                cartProductDAO = database.getCartProductDAO();
-                CartProduct product = cartProductDAO.getItemById(cartList.get(index).getProductId(), cartList.get(index).getMerchantId());
-                product.setProductPrice((product.getProductPrice()/product.getQuantityBrought()) * (product.getQuantityBrought() + 1));
-                product.setQuantityBrought(product.getQuantityBrought() + 1);
-                cartProductDAO.update(product);
-                cartList.set(position, product);
-                cartList.get(position).setQuantityBrought(product.getQuantityBrought());
+//                cartProductDAO = database.getCartProductDAO();
+//                CartProduct product = cartProductDAO.getItemById(cartList.get(index).getProductId(), cartList.get(index).getMerchantId());
+//                product.setProductPrice((product.getProductPrice()/product.getQuantityBrought()) * (product.getQuantityBrought() + 1));
+//                product.setQuantityBrought(product.getQuantityBrought() + 1);
+//                cartProductDAO.update(product);
+//                cartList.set(position, product);
+//                cartList.get(position).setQuantityBrought(product.getQuantityBrought());
                 notifyItemChanged(position);
             }
         });
 
+//        cartProductDAO = database.getCartProductDAO();
         holder.decrease.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int count = Integer.parseInt(String.valueOf(holder.textCount.getText()));
-                cartProductDAO = database.getCartProductDAO();
-
-                    if (cartList.get(index).getQuantityBrought() > 1) {
-                        cartList.get(index).setQuantityBrought(cartList.get(index).getQuantityBrought() - 1);
-                        holder.textCount.setText(String.valueOf(cartList.get(index).getQuantityBrought()));
-
-                        CartProduct product = cartProductDAO.getItemById(cartList.get(index).getProductId(), cartList.get(index).getMerchantId());
-                        product.setProductPrice((product.getProductPrice() / product.getQuantityBrought()) * (product.getQuantityBrought() - 1));
-                        product.setQuantityBrought(product.getQuantityBrought() - 1);
-                        cartProductDAO.update(product);
-                        cartList.set(position, product);
-                        cartList.get(position).setQuantityBrought(product.getQuantityBrought());
-                        notifyItemChanged(position);
-                    } else if (cartList.get(index).getQuantityBrought() == 1) {
-                        CartProduct cartProduct = cartProductDAO.getItemById(cartList.get(index).getProductId(), cartList.get(index).getMerchantId());
-                        cartProductDAO.delete(cartProduct);
-                        cartList.remove(position);
-                        notifyItemRemoved(position);
-                        notifyItemRangeChanged(position, getItemCount());
-                    }
-
+//                cartProductDAO = database.getCartProductDAO();
+                if (cartList.get(index).getQuantityBrought() > 1) {
+                    cartList.get(index).setQuantityBrought(cartList.get(index).getQuantityBrought() - 1);
+                    holder.textCount.setText(String.valueOf(cartList.get(index).getQuantityBrought()));
+//
+//                    CartProduct product = cartProductDAO.getItemById(cartList.get(index).getProductId(), cartList.get(index).getMerchantId());
+//                    product.setProductPrice((product.getProductPrice()/product.getQuantityBrought()) * (product.getQuantityBrought() - 1));
+//                    product.setQuantityBrought(product.getQuantityBrought() - 1);
+//                    cartProductDAO.update(product);
+//                    cartList.set(position, product);
+//                    cartList.get(position).setQuantityBrought(product.getQuantityBrought());
+                    notifyItemChanged(position);
+                } else if (cartList.get(index).getQuantityBrought() == 1) {
+//                    CartProduct cartProduct = cartProductDAO.getItemById(cartList.get(index).getProductId(), cartList.get(index).getMerchantId());
+//                    cartProductDAO.delete(cartProduct);
+//                    cartList.remove(position);
+                    notifyItemRemoved(position);
+                    notifyItemRangeChanged(position, getItemCount());
+                }
             }
         });
 
@@ -132,3 +126,4 @@ public class DisplayCartAdapter extends RecyclerView.Adapter<DisplayCartAdapter.
         }
     }
 }
+

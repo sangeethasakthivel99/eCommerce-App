@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class Products {
     @SerializedName("productId")
-    private int productId;
+    private String productId;
     @SerializedName("productName")
     private String productName;
     @SerializedName("productPrice")
@@ -37,11 +37,11 @@ public class Products {
                 '}';
     }
 
-    public int getProductId() {
+    public String getProductId() {
         return productId;
     }
 
-    public void setProductId(int productId) {
+    public void setProductId(String productId) {
         this.productId = productId;
     }
 

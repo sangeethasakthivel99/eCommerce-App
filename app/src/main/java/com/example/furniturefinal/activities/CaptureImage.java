@@ -1,10 +1,6 @@
 package com.example.furniturefinal.activities;
 
-import android.graphics.Camera;
-import android.os.Bundle;
-
-import com.example.furniturefinal.R;
-
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -12,20 +8,14 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.app.Activity;
-import android.os.Environment;
+import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
+import com.example.furniturefinal.R;
 
 public class CaptureImage extends Activity {
     ImageView viewImage;
@@ -94,7 +84,6 @@ public class CaptureImage extends Activity {
                 String picturePath = c.getString(columnIndex);
                 c.close();
                 Bitmap thumbnail = (BitmapFactory.decodeFile(picturePath));
-                // Log.w("path of image from gallery......******************.........", picturePath+"");
                 viewImage.setImageBitmap(thumbnail);
             }
         }
