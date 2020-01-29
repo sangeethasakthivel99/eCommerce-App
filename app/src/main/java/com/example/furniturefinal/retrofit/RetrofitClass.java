@@ -22,7 +22,7 @@ public class RetrofitClass {
                     .addInterceptor(new FirebaseUserIdTokenInterceptor())
                     .build();
             retrofit = new Retrofit.Builder()
-                    .baseUrl("http://10.177.68.26:8111/")
+                    .baseUrl("http://172.16.29.144:8111/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .client(client)
                     .build();
